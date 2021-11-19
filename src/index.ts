@@ -1,3 +1,7 @@
 /** @format */
 
-export class Sdk { }
+const a;
+
+let b = "1";
+
+function Fail() {}
