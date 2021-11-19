@@ -1,1 +1,1 @@
-# raygunapi-js
+# Raygun SDK
