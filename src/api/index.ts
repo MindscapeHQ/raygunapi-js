@@ -1,7 +1,7 @@
 /** @format */
 
 export class ApiClient {
-  private planId: string;
 
-  constructor() {}
+  constructor(clientId: string, clientSecret: string) {}
+  
 }
