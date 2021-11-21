@@ -1,12 +1,11 @@
-/** @format */
+// /** @format */
+// import Raygun from "../src/";
 
-import { sum } from "../src";
-
-describe("sum", () => {
-  describe("Given 5 + 5", () => {
-    it("returns 10", () => {
-      const res = sum(5, 5);
-      expect(res).toEqual(10);
-    });
-  });
-});
+// describe("Api", () => {
+//   describe("Auth", () => {
+//     describe("has default auth strategy", () => {
+//       const res = Raygun({ clientId: "rg_dbvowl" });
+//       expect(res.execute()).not.toThrowError();
+//     });
+//   });
+// });

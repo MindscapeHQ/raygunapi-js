@@ -36,5 +36,7 @@
     "tslib": "^2.3.1",
     "typescript": "^4.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cross-fetch": "^3.1.4"
+  }
 }

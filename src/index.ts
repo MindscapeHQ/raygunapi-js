@@ -1,5 +1,6 @@
 /** @format */
+import { ApiClient } from "./api";
 
-export function sum(a: number, b: number): number {
-  return a + b;
+function createClient(clientId: string, clientSecret: string): ApiClient {
+  return new ApiClient();
 }
