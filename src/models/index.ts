@@ -1,5 +1,9 @@
 /** @format */
 
+import { ApiClient } from "../api";
+import { Alerts } from "../entities";
+import * as Models from "../models";
+
 type IPageLink = {
   href: string;
 };
@@ -15,4 +19,10 @@ export type IPagedEntity<T> = {
     previous: IPageLink | null;
   };
   totalCount: number;
+};
+
+export type IRaygunApiClient = {
+  apiClient: typeof ApiClient;
+  Alerts: typeof Alerts;
+  Models: typeof Models;
 };

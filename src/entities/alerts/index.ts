@@ -13,8 +13,8 @@ export class Alerts {
    * @param identifier - Id related to a specific alert
    * @returns A single alert or null if not found;
    */
-  async get(identifier: string): Promise<IAlert | null> {
-    let urlSegments = [GlobalConfig.planId, this.baseUrl, identifier];
+  public async get(identifier: string): Promise<IAlert | null> {
+    let urlSegments = [GlobalConfig.planIdentifier, this.baseUrl, identifier];
 
     try {
       const url = Network.buildApiUrl(urlSegments);
@@ -26,7 +26,7 @@ export class Alerts {
   }
 
   async getAll(subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | null> {
-    let urlSegments = ["user", GlobalConfig.userId, this.baseUrl, GlobalConfig.planId];
+    let urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, GlobalConfig.planIdentifier];
 
     var queryParams: Models.IQueryParams = {
       subscribedOnly,
