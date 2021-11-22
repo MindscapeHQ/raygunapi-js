@@ -1,6 +1,7 @@
 /** @format */
 
 import { GlobalConfig } from "../config";
+import { IQueryParams } from "./models";
 
 /**
  * Adds general headers to a RequestInit object.
@@ -27,4 +28,17 @@ export function buildApiUrl(path: string | string[]): string {
   const baseUrl = GlobalConfig.apiUrl;
   const isString = typeof path === "string";
   return `${baseUrl}/${isString ? path : path.join("/")}`;
+}
+
+/**
+ * Returns a url with query parameters attached to it.
+ * @param url - base url to be used to form the request url.
+ * @param params - query string parameters to be added
+ * @returns url generated from base url and query string parameters.
+ */
+export function addQueryStringParams(url: string, params: IQueryParams): string {
+  const queryString = Object.keys(params)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    .join("&");
+  return `${url}?${queryString}`;
 }

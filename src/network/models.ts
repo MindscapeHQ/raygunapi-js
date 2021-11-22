@@ -6,3 +6,7 @@ export enum HTTPMethods {
   PATCH = "PATCH",
   DELETE = "DELETE",
 }
+
+export type IQueryParams = {
+  [key: string]: string | number | boolean;
+};

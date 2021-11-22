@@ -1,13 +1,18 @@
 /** @format */
+import { isEmpty } from "lodash";
 
-import { HTTPMethods } from "./models";
-import { addHTTPHeaders, buildApiUrl } from "./utils";
+import * as Models from "./models";
+import { addHTTPHeaders, addQueryStringParams, buildApiUrl } from "./utils";
 
-async function executeRequest(method: HTTPMethods, url: string, options: RequestInit = {}, payload?: any): Promise<any> {
+async function executeRequest(method: Models.HTTPMethods, url: string, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}, payload?: any): Promise<any> {
   const _options = { method, ...options };
 
   if (payload) {
     _options.body = JSON.stringify(payload);
+  }
+
+  if (!isEmpty(queryStringParameters)) {
+    url = addQueryStringParams(url, queryStringParameters);
   }
 
   const res = await fetch(url, addHTTPHeaders(_options));
@@ -20,8 +25,8 @@ async function executeRequest(method: HTTPMethods, url: string, options: Request
  * @param options - optional options to pass to fetch
  * @returns The response returned for the request.
  */
-async function get<T>(url: string, options: RequestInit = {}): Promise<T> {
-  return await executeRequest(HTTPMethods.GET, url, options);
+async function get<T>(url: string, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+  return await executeRequest(Models.HTTPMethods.GET, url, queryStringParameters, options);
 }
 
 /**
@@ -31,8 +36,8 @@ async function get<T>(url: string, options: RequestInit = {}): Promise<T> {
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function post<T>(url: string, payload: any, options: RequestInit = {}): Promise<T> {
-  return await executeRequest(HTTPMethods.POST, url, options, payload);
+async function post<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+  return await executeRequest(Models.HTTPMethods.POST, url, queryStringParameters, options, payload);
 }
 
 /**
@@ -42,8 +47,8 @@ async function post<T>(url: string, payload: any, options: RequestInit = {}): Pr
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function put<T>(url: string, payload: any, options: RequestInit = {}): Promise<T> {
-  return await executeRequest(HTTPMethods.PUT, url, options, payload);
+async function put<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+  return await executeRequest(Models.HTTPMethods.PUT, url, queryStringParameters, options, payload);
 }
 
 /**
@@ -52,8 +57,8 @@ async function put<T>(url: string, payload: any, options: RequestInit = {}): Pro
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function deleteFromApi<T>(url: string, payload: any, options: any = {}): Promise<T> {
-  return await executeRequest(HTTPMethods.DELETE, url, options, payload);
+async function deleteFromApi<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: any = {}): Promise<T> {
+  return await executeRequest(Models.HTTPMethods.DELETE, url, queryStringParameters, options, payload);
 }
 
 const Network = {
@@ -65,3 +70,4 @@ const Network = {
 };
 
 export default Network;
+export * as Models from "./models";
