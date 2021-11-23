@@ -1,7 +1,7 @@
 {
   "name": "sdk",
   "displayName": "sdk",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
