@@ -15,6 +15,7 @@ export function addHTTPHeaders(options: RequestInit): RequestInit {
       "Content-Type": "application/json",
       Authorization: `Bearer ${GlobalConfig.jwtToken}`,
     },
+    mode: "cors",
     ...options,
   };
 }

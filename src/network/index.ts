@@ -1,21 +1,28 @@
 /** @format */
-import { isEmpty } from "lodash";
-
 import * as Models from "./models";
 import { addHTTPHeaders, addQueryStringParams, buildApiUrl } from "./utils";
 
-async function executeRequest(method: Models.HTTPMethods, url: string, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}, payload?: any): Promise<any> {
-  const _options = { method, ...options };
+async function executeRequest(method: Models.HTTPMethods, url: string, queryStringParameters?: Models.IQueryParams, options?: RequestInit, payload?: any): Promise<any> {
+  var _options = addHTTPHeaders({ method });
+
+  if (options) {
+    _options = { ..._options, ...options };
+  }
 
   if (payload) {
-    _options.body = JSON.stringify(payload);
+    if (typeof payload !== "string") {
+      payload = JSON.stringify(payload);
+    }
+
+    _options.body = payload;
   }
 
-  if (!isEmpty(queryStringParameters)) {
+  if (queryStringParameters) {
     url = addQueryStringParams(url, queryStringParameters);
   }
+  console.log("Req options", _options);
 
-  const res = await fetch(url, addHTTPHeaders(_options));
+  const res = await fetch(url, _options);
   return await res.json();
 }
 
@@ -25,7 +32,7 @@ async function executeRequest(method: Models.HTTPMethods, url: string, queryStri
  * @param options - optional options to pass to fetch
  * @returns The response returned for the request.
  */
-async function get<T>(url: string, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+async function get<T>(url: string, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
   return await executeRequest(Models.HTTPMethods.GET, url, queryStringParameters, options);
 }
 
@@ -36,7 +43,7 @@ async function get<T>(url: string, queryStringParameters: Models.IQueryParams = 
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function post<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+async function post<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
   return await executeRequest(Models.HTTPMethods.POST, url, queryStringParameters, options, payload);
 }
 
@@ -47,7 +54,7 @@ async function post<T>(url: string, payload: any, queryStringParameters: Models.
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function put<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: RequestInit = {}): Promise<T> {
+async function put<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
   return await executeRequest(Models.HTTPMethods.PUT, url, queryStringParameters, options, payload);
 }
 
@@ -57,7 +64,7 @@ async function put<T>(url: string, payload: any, queryStringParameters: Models.I
  * @param options - optional options to pass to fetch api
  * @returns The response returned for the request.
  */
-async function deleteFromApi<T>(url: string, payload: any, queryStringParameters: Models.IQueryParams = {}, options: any = {}): Promise<T> {
+async function deleteFromApi<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
   return await executeRequest(Models.HTTPMethods.DELETE, url, queryStringParameters, options, payload);
 }
 

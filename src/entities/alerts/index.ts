@@ -4,9 +4,15 @@ import Network, { Models } from "../../network";
 import { IPagedEntity } from "../../models";
 
 import { IAlert, IAlertSummary } from "./models";
+import { ApiClient } from "../../api";
 
 export class Alerts {
+  apiClient: ApiClient;
   baseUrl: string = "alerts";
+
+  constructor(apiClient: ApiClient) {
+    this.apiClient = apiClient;
+  }
 
   /**
    * Retrieves an alert matching the given identifier

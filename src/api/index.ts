@@ -1,10 +1,15 @@
 /** @format */
 
-import { GlobalConfig } from "../config";
+import { IAuthStrategy, TokenManager } from "../auth";
 
 export class ApiClient {
-  constructor(userIdentifier: string, planIdentifier: string) {
-    GlobalConfig.userIdentifier = userIdentifier;
-    GlobalConfig.planIdentifier = planIdentifier;
+  private _tokenManager;
+
+  constructor(authStrategy: IAuthStrategy) {
+    this._tokenManager = new TokenManager(authStrategy);
+  }
+
+  async authenticate(): Promise<void> {
+    await this._tokenManager.authenticate();
   }
 }
