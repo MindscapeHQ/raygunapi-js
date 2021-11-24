@@ -1,17 +1,11 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
-  "extends": [
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "eslint-plugin-tsdoc"],
+  "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "rules": {
-    "no-console": 2,       // Means warning
-    "prettier/prettier": 2 // Means error
+    "no-console": 2, // Means warning
+    "prettier/prettier": 2, // Means error
+    "tsdoc/syntax": "warn"
   }
 }

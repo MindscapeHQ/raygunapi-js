@@ -1,17 +1,30 @@
+/** @format */
 import typescript from 'rollup-plugin-typescript2';
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import {
+  nodeResolve
+} from "@rollup/plugin-node-resolve";
+import autoNamedExports from 'rollup-plugin-auto-named-exports';
+import {
+  terser
+} from "rollup-plugin-terser";
 import babel from "@rollup/plugin-babel";
+
 import pkg from "./package.json";
 
 const input = ["src/index.ts"];
 
 const umdBuildConfig = {
   input,
+  external: ['lodash'],
   plugins: [
-    typescript({ useTsconfigDeclarationDir: true }), 
-    nodeResolve(), 
-    babel({ babelHelpers: "bundled" }), 
+    typescript({
+      useTsconfigDeclarationDir: true
+    }),
+    nodeResolve(),
+    babel({
+      babelHelpers: "bundled"
+    }),
+    autoNamedExports(),
     terser()
   ],
   output: {
@@ -26,12 +39,14 @@ const umdBuildConfig = {
 
 const esmCommonJsConfig = {
   input,
+  external: ['lodash'],
   plugins: [
-    typescript({ useTsconfigDeclarationDir: true }), 
+    typescript({
+      useTsconfigDeclarationDir: true
+    }),
     nodeResolve()
   ],
-  output: [
-    {
+  output: [{
       dir: "dist/esm",
       format: "esm",
       exports: "named",

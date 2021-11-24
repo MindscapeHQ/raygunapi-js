@@ -1,7 +1,10 @@
 /** @format */
 
-export class ApiClient {
+import { GlobalConfig } from "../config";
 
-  constructor(clientId: string, clientSecret: string) {}
-  
+export class ApiClient {
+  constructor(userIdentifier: string, planIdentifier: string) {
+    GlobalConfig.userIdentifier = userIdentifier;
+    GlobalConfig.planIdentifier = planIdentifier;
+  }
 }
