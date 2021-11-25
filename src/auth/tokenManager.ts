@@ -58,7 +58,10 @@ export class TokenManager {
   }
 
   private getTokenFromBrowserStorage(): string | undefined {
-    return localStorage.getItem(this.tokenStorageKey) || undefined;
+    if (localStorage) {
+      return localStorage.getItem(this.tokenStorageKey) || undefined;
+    }
+    return undefined;
   }
 
   private isTokenExpired(): boolean {

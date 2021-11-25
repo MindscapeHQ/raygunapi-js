@@ -16,8 +16,8 @@ export class ApiClient {
     this.alerts = new Entities.Alerts(this.networkClient);
   }
 
-  async authenticate(): Promise<void> {
-    await this.tokenManager.authenticate();
+  async authenticate(): Promise<string | undefined> {
+    return await this.tokenManager.authenticate();
   }
 
   getEntities() {
