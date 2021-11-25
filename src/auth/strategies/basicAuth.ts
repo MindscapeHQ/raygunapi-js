@@ -1,6 +1,5 @@
 /** @format */
 
-import Network from "../../network";
 import { IAuthStrategy, TokenServerResponse } from "../models";
 import { toFormUrlEncoded } from "../utils";
 
@@ -28,7 +27,7 @@ export class BasicAuthStrategy implements IAuthStrategy {
    * Authenticate a user with the Raygun API.
    * @returns JWT Token if successful, otherwise null.
    */
-  async authenticate(): Promise<undefined> {
+  async authenticate(): Promise<string | undefined> {
     const payload = {
       grant_type: "client_credentials",
       client_id: this.clientId,
@@ -36,18 +35,16 @@ export class BasicAuthStrategy implements IAuthStrategy {
     };
 
     try {
-      const response = await Network.post<TokenServerResponse>(
-        this.baseUrl,
-        toFormUrlEncoded(payload),
-        {},
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-      console.log(response);
-      return response.access_token;
+      const response = await fetch(this.baseUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: toFormUrlEncoded(payload),
+      });
+
+      const json: TokenServerResponse = await response.json();
+      return json.access_token;
     } catch (error) {
       return undefined;
     }

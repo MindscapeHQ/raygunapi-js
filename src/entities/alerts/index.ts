@@ -1,17 +1,18 @@
 /** @format */
 import { GlobalConfig } from "../../config";
-import Network, { Models } from "../../network";
+import { Models, buildApiUrl, NetworkClient } from "../../network";
 import { IPagedEntity } from "../../models";
 
 import { IAlert, IAlertSummary } from "./models";
-import { ApiClient } from "../../api";
+import { wrapWithErrorHandler } from "../../network/utils";
 
 export class Alerts {
-  apiClient: ApiClient;
   baseUrl: string = "alerts";
 
-  constructor(apiClient: ApiClient) {
-    this.apiClient = apiClient;
+  networkClient: NetworkClient;
+
+  constructor(networkClient: NetworkClient) {
+    this.networkClient = networkClient;
   }
 
   /**
@@ -22,17 +23,23 @@ export class Alerts {
   public async get(identifier: string): Promise<IAlert | null> {
     let urlSegments = [GlobalConfig.planIdentifier, this.baseUrl, identifier];
 
-    try {
-      const url = Network.buildApiUrl(urlSegments);
-      const res = await Network.get<IAlert>(url);
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      const res = await this.networkClient.get<IAlert>(url);
       return res;
-    } catch (err) {
-      return null;
-    }
+    });
   }
 
-  async getAll(subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | null> {
-    let urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, GlobalConfig.planIdentifier];
+  /**
+   * Retrieves a list of alerts
+   * @param planIdentifier - Identifier of the target plan
+   * @param subscribedOnly - If true, only subscribed alerts will be returned
+   * @param page - The page number to return
+   * @param pageSize - The number of items per page. Max is 100
+   * @returns An array of {AlertSummary} objects
+   */
+  async getAll(planIdentifier: string, subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | null> {
+    let urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, planIdentifier];
 
     var queryParams: Models.IQueryParams = {
       subscribedOnly,
@@ -40,12 +47,9 @@ export class Alerts {
       pageSize,
     };
 
-    try {
-      const url = Network.buildApiUrl(urlSegments);
-      const res = await Network.get<IPagedEntity<IAlertSummary>>(url, queryParams);
-      return res;
-    } catch (err) {
-      return null;
-    }
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      return await this.networkClient.get<IPagedEntity<IAlertSummary>>(url, queryParams);
+    });
   }
 }

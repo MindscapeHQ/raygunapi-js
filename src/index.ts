@@ -1,20 +1,25 @@
 /** @format */
 import { ApiClient } from "./api";
-import { AuthStrategies } from "./auth";
+import { AuthStrategies, IAuthStrategy } from "./auth";
 import * as Models from "./models";
-import * as Entities from "./entities";
-import { IAuthStrategy } from "./auth/models";
+import { GlobalConfig } from "./config";
 
-export function createClient(authStrategy: IAuthStrategy) {
+export type IClientOptions = {
+  authStrategy: IAuthStrategy;
+  userIdentifier: string;
+};
+
+export function createClient({ authStrategy, userIdentifier }: IClientOptions) {
+  GlobalConfig.userIdentifier = userIdentifier;
+
   const apiClient = new ApiClient(authStrategy);
 
-  const Alerts = new Entities.Alerts(apiClient);
-
   const authenticate = () => apiClient.authenticate();
+  const entities = apiClient.getEntities();
 
   return {
     authenticate,
-    Alerts,
+    ...entities,
     Models,
   };
 }

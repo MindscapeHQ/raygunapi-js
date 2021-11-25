@@ -8,7 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <script src="../../dist/umd/raygun.min.js"></script>
+    <script async src="../../dist/umd/raygun.min.js"></script>
+
+    <script async>
+      function createRaygunClient() {
+        var raygunClient = Raygun.createClient({
+          userIdentifier: "1f0j70c",
+          authStrategy: new Raygun.AuthStrategies.BasicAuthStrategy("", ""),
+        });
+        raygunClient.authenticate();
+
+        window.raygunClient = raygunClient;
+      }
+
+      async function fetchAlerts() {
+        const alerts = await raygunClient.Alerts.getAll("");
+        console.log("Alerts", alerts);
+      }
+    </script>
   </head>
-  <body></body>
+  <body>
+    <button onclick="createRaygunClient()">Create Client</button>
+    <button onclick="fetchAlerts()">Fetch alerts</button>
+  </body>
 </html>

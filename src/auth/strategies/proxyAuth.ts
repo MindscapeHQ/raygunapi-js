@@ -1,6 +1,5 @@
 /** @format */
 
-import Network from "../../network";
 import { IAuthStrategy } from "../models";
 
 /**
@@ -25,7 +24,8 @@ export class ProxyAuthStrategy implements IAuthStrategy {
    */
   async authenticate(): Promise<string | undefined> {
     try {
-      return await Network.get<string>(this.proxyUrl);
+      const res = await fetch(this.proxyUrl);
+      return await res.json();
     } catch (error) {
       return undefined;
     }
