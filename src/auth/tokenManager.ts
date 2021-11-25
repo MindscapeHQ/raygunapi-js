@@ -8,19 +8,28 @@ import { IAuthStrategy } from ".";
 export class TokenManager {
   private authStrategy: IAuthStrategy;
   private token: string | undefined;
+  private saveToBrowserStorage: boolean;
+  private tokenStorageKey: string = "x-raygnapi";
 
-  constructor(authStrategy: IAuthStrategy) {
+  constructor(authStrategy: IAuthStrategy, saveTokenInBrowser: boolean = true) {
     this.authStrategy = authStrategy;
+    this.saveToBrowserStorage = saveTokenInBrowser;
+
+    if (saveTokenInBrowser) {
+      this.token = this.getTokenFromBrowserStorage();
+    }
   }
 
   async authenticate(): Promise<string | undefined> {
-    const token = await this.authStrategy.authenticate();
-    if (token) {
-      this.saveToken(token);
-      return token;
-    }
+    if (this.isTokenExpired() || !this.isTokenValid()) {
+      const token = await this.authStrategy.authenticate();
+      if (token) {
+        this.saveToken(token);
+        return token;
+      }
 
-    return undefined;
+      return undefined;
+    }
   }
 
   async refreshToken(): Promise<string | undefined> {
@@ -28,15 +37,28 @@ export class TokenManager {
   }
 
   async getToken(): Promise<string | undefined> {
-    if (this.isTokenExpired()) {
+    if (this.isTokenExpired() || !this.isTokenValid()) {
       return await this.refreshToken();
     }
 
     return this.token;
   }
 
+  removeToken() {
+    this.token = undefined;
+    sessionStorage.removeItem(this.tokenStorageKey);
+  }
+
   private saveToken(token: string) {
     this.token = token;
+
+    if (this.saveToBrowserStorage && localStorage) {
+      localStorage.setItem(this.tokenStorageKey, token);
+    }
+  }
+
+  private getTokenFromBrowserStorage(): string | undefined {
+    return localStorage.getItem(this.tokenStorageKey) || undefined;
   }
 
   private isTokenExpired(): boolean {
@@ -54,5 +76,20 @@ export class TokenManager {
     }
   }
 
-  // TODO add token validation i.e ensure that the decoded token has a valid userIdentifier etc.
+  private isTokenValid(): boolean {
+    if (!this.token) {
+      return false;
+    }
+
+    try {
+      const { raygun_planId, raygun_role } = jwtDecode<JwtToken>(this.token);
+      if (raygun_planId && raygun_role) {
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
 }

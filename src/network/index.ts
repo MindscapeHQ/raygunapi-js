@@ -71,7 +71,6 @@ class NetworkClient {
     if (queryStringParameters) {
       url = addQueryStringParams(url, queryStringParameters);
     }
-    console.log("Req options", _options);
 
     const res = await fetch(url, _options);
     return await res.json();
