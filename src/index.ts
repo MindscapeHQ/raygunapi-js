@@ -14,7 +14,8 @@ export function createClient({ authStrategy, userIdentifier }: IClientOptions) {
 
   const apiClient = new ApiClient(authStrategy);
 
-  const authenticate = () => apiClient.authenticate();
+  const authenticate: () => Promise<string | undefined> = async () => apiClient.authenticate();
+
   const entities = apiClient.getEntities();
 
   return {
