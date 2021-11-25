@@ -12,6 +12,17 @@ export type AuthenticateResponse = {
   expires_in: string;
 };
 
+export type JwtToken = {
+  nbf: number;
+  exp: number;
+  iss: string;
+  client_id: string;
+  raygun_planId: string;
+  raygun_role: string;
+  jti: string;
+  iat: number;
+};
+
 export interface IAuthStrategy {
   /**
    * Authenticate a user with the Raygun API.
