@@ -57,6 +57,11 @@
         const alert = await raygunClient.Alerts.delete("5n2", window.alertId);
         console.log("Deleted alert");
       }
+
+      async function fetchApplication() {
+        const apps = await raygunClient.Applications.get("", "dbvowl");
+        console.log("Applications", apps);
+      }
     </script>
   </head>
   <body onload="createRaygunClient()">
@@ -74,6 +79,11 @@
       <button onclick="deleteAlert()">Delete alert</button>
       <button onclick="subscribeToAlert()">Subscribe to alert</button>
       <button onclick="unsubscribeToAlert()">Unsubscribed to alert</button>
+    </section>
+
+    <section>
+      <h2>Applications</h2>
+      <button onclick="fetchApplication()">Get application</button>
     </section>
   </body>
 </html>

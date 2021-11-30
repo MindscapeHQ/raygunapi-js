@@ -16,7 +16,7 @@ export class Alerts {
   }
 
   /**
-   * Retrieves an alert matching the given identifier
+   * Retrieve an alert matching the given identifier
    * @param planIdentifier - Identifier of the target plan
    * @param identifier - Id related to a specific alert
    * @returns A single alert or null if not found;
@@ -32,7 +32,7 @@ export class Alerts {
   }
 
   /**
-   * Retrieves a list of alerts
+   * Retrieve a list of alerts for a given plan.
    * @param planIdentifier - Identifier of the target plan
    * @param subscribedOnly - If true, only subscribed alerts will be returned
    * @param page - The page number to return

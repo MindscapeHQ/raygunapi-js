@@ -9,11 +9,13 @@ export class ApiClient {
   private networkClient: NetworkClient;
 
   private alerts: Entities.Alerts;
+  private applications: Entities.Applications;
 
   constructor(authStrategy: IAuthStrategy) {
     this.tokenManager = new TokenManager(authStrategy);
     this.networkClient = new NetworkClient(this.tokenManager);
     this.alerts = new Entities.Alerts(this.networkClient);
+    this.applications = new Entities.Applications(this.networkClient);
   }
 
   async authenticate(): Promise<string | undefined> {
@@ -27,6 +29,7 @@ export class ApiClient {
   getEntities() {
     return {
       Alerts: this.alerts,
+      Applications: this.applications,
     };
   }
 }
