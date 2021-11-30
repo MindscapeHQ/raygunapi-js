@@ -33,7 +33,13 @@ export class TokenManager {
   }
 
   async refreshToken(): Promise<string | undefined> {
-    return await this.authenticate();
+    const token = await this.authStrategy.authenticate();
+    if (token) {
+      this.saveToken(token);
+      return token;
+    }
+
+    return undefined;
   }
 
   async getToken(): Promise<string | undefined> {

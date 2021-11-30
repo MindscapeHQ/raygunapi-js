@@ -20,6 +20,10 @@ export class ApiClient {
     return await this.tokenManager.authenticate();
   }
 
+  async refreshToken(): Promise<string | undefined> {
+    return await this.tokenManager.refreshToken();
+  }
+
   getEntities() {
     return {
       Alerts: this.alerts,
