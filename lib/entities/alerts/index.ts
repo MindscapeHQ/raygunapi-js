@@ -21,7 +21,7 @@ export class Alerts {
    * @param identifier - Id related to a specific alert
    * @returns A single alert or null if not found;
    */
-  public async get(planIdentifier: string, identifier: string): Promise<IAlert | null> {
+  public async get(planIdentifier: string, identifier: string): Promise<IAlert | undefined> {
     const urlSegments = [planIdentifier, this.baseUrl, identifier];
 
     return await wrapWithErrorHandler(async () => {
@@ -39,7 +39,7 @@ export class Alerts {
    * @param pageSize - The number of items per page. Max is 100
    * @returns An array of {AlertSummary} objects
    */
-  async getAll(planIdentifier: string, subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | null> {
+  async getAll(planIdentifier: string, subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | undefined> {
     const urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, planIdentifier];
 
     var queryParams: Models.IQueryParams = {
@@ -60,7 +60,7 @@ export class Alerts {
    * @param alert - The alert to create
    * @returns The created alert
    */
-  async create(planIdentifier: string, alert: IAlert): Promise<IAlert | null> {
+  async create(planIdentifier: string, alert: IAlert): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl];
 
     var queryParams: Models.IQueryParams = {
@@ -80,7 +80,7 @@ export class Alerts {
    * @param alert - The new version of the alert
    * @returns The updated alert
    */
-  async update(planIdentifier: string, alert: IAlert): Promise<IAlert | null> {
+  async update(planIdentifier: string, alert: IAlert): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl, alert.identifier];
 
     var queryParams: Models.IQueryParams = {

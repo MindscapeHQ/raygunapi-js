@@ -1,6 +1,6 @@
 {
   "name": "raygun",
-  "displayName": "Raygun",
+  "displayName": "RaygunSDK",
   "version": "0.1.0",
   "description": "",
   "main": "dist/cjs/index.js",

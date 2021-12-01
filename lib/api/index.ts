@@ -1,8 +1,8 @@
 /** @format */
 
 import { IAuthStrategy, TokenManager } from "../auth";
-import * as Entities from "../entities";
 import { NetworkClient } from "../network";
+import * as Entities from "../entities";
 
 export class ApiClient {
   private tokenManager: TokenManager;

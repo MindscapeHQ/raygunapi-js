@@ -18,7 +18,7 @@ export class Applications {
    * @param identifier - Identifier of the application to retrieve.
    * @returns A single application or null if not found.
    */
-  public async get(_planIdentifier: string, identifier: string): Promise<IApplication | null> {
+  public async get(_planIdentifier: string, identifier: string): Promise<IApplication | undefined> {
     const urlSegments = [this.baseUrl, identifier];
 
     return await wrapWithErrorHandler(async () => {

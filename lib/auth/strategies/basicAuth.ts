@@ -1,5 +1,6 @@
 /** @format */
 
+import { wrapWithErrorHandler } from "../../network/utils";
 import { IAuthStrategy, TokenServerResponse } from "../models";
 import { toFormUrlEncoded } from "../utils";
 
@@ -34,7 +35,7 @@ export class BasicAuthStrategy implements IAuthStrategy {
       client_secret: this.clientSecret,
     };
 
-    try {
+    return await wrapWithErrorHandler(async () => {
       const response = await fetch(this.baseUrl, {
         method: "POST",
         headers: {
@@ -45,8 +46,6 @@ export class BasicAuthStrategy implements IAuthStrategy {
 
       const json: TokenServerResponse = await response.json();
       return json.access_token;
-    } catch (error) {
-      return undefined;
-    }
+    });
   }
 }

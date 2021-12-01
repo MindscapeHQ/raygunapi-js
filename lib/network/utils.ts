@@ -45,10 +45,19 @@ export function addQueryStringParams(url: string, params: IQueryParams): string 
   return `${url}?${queryString}`;
 }
 
-export async function wrapWithErrorHandler<T>(method: () => T): Promise<T | null> {
+/**
+ * When the given method errors, log the error based on the client config or return null.
+ * @param method - function to wrap with a try catch
+ * @returns Result of the passed function.
+ */
+export async function wrapWithErrorHandler<T>(method: () => T): Promise<T | undefined> {
   try {
     return await method();
   } catch (err) {
-    return null;
+    if (GlobalConfig.logFunc) {
+      GlobalConfig.logFunc(err);
+    }
+
+    return Promise.resolve(undefined);
   }
 }

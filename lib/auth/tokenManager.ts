@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 
 import { JwtToken } from "./models";
 import { IAuthStrategy } from ".";
+import { wrapWithErrorHandler } from "../network/utils";
 
 export class TokenManager {
   private authStrategy: IAuthStrategy;
@@ -21,7 +22,21 @@ export class TokenManager {
   }
 
   async authenticate(): Promise<string | undefined> {
-    if (this.isTokenExpired() || !this.isTokenValid()) {
+    return await wrapWithErrorHandler(async () => {
+      if (this.isTokenExpired() || !this.isTokenValid()) {
+        const token = await this.authStrategy.authenticate();
+        if (token) {
+          this.saveToken(token);
+          return token;
+        }
+
+        return undefined;
+      }
+    });
+  }
+
+  async refreshToken(): Promise<string | undefined> {
+    return await wrapWithErrorHandler(async () => {
       const token = await this.authStrategy.authenticate();
       if (token) {
         this.saveToken(token);
@@ -29,17 +44,7 @@ export class TokenManager {
       }
 
       return undefined;
-    }
-  }
-
-  async refreshToken(): Promise<string | undefined> {
-    const token = await this.authStrategy.authenticate();
-    if (token) {
-      this.saveToken(token);
-      return token;
-    }
-
-    return undefined;
+    });
   }
 
   async getToken(): Promise<string | undefined> {

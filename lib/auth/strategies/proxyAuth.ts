@@ -1,5 +1,6 @@
 /** @format */
 
+import { wrapWithErrorHandler } from "../../network/utils";
 import { IAuthStrategy } from "../models";
 
 /**
@@ -23,11 +24,9 @@ export class ProxyAuthStrategy implements IAuthStrategy {
    * @returns JWT Token if successful, otherwise null.
    */
   async authenticate(): Promise<string | undefined> {
-    try {
+    return await wrapWithErrorHandler(async () => {
       const res = await fetch(this.proxyUrl);
       return await res.json();
-    } catch (error) {
-      return undefined;
-    }
+    });
   }
 }
