@@ -8,11 +8,13 @@ export type IClientOptions = {
   authStrategy: IAuthStrategy;
   userIdentifier: string;
   logFunc?: (message: any) => void;
+  apiUrl?: string;
 };
 
-export function createClient({ authStrategy, userIdentifier, logFunc }: IClientOptions): Models.IRaygunClient {
+export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "https://publicapi.raygun.com/api/v2" }: IClientOptions): Models.IRaygunClient {
   GlobalConfig.userIdentifier = userIdentifier;
   GlobalConfig.logFunc = logFunc;
+  GlobalConfig.apiUrl = apiUrl;
 
   const apiClient = new ApiClient(authStrategy);
 

@@ -12,7 +12,7 @@ type IGlobalConfig = {
 export const GlobalConfig: IGlobalConfig = {
   planIdentifier: "",
   userIdentifier: "",
-  apiUrl: "https://publicapi.raygun.com/api/v2",
+  apiUrl: "",
   jwtToken: "",
   tokenExpiration: undefined,
   logFunc: undefined,
