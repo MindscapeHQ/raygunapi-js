@@ -31,4 +31,4 @@ export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "
   };
 }
 
-export { AuthStrategies };
+export { AuthStrategies, Models };
