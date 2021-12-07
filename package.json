@@ -1,5 +1,5 @@
 {
-  "name": "raygun",
+  "name": "@raygun.io/sdk",
   "displayName": "RaygunSDK",
   "version": "0.1.0",
   "description": "",
@@ -13,6 +13,9 @@
     "test": "jest",
     "test-browser": "serve .",
     "docs": "typedoc"
+  },
+  "publishConfig": {
+    "access": "restricted"
   },
   "keywords": [],
   "author": "",
