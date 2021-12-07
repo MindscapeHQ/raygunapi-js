@@ -9,7 +9,7 @@ export class TokenManager {
   private authStrategy: IAuthStrategy;
   private token: string | undefined;
   private saveToBrowserStorage: boolean;
-  private tokenStorageKey: string = "x-raygnapi";
+  private tokenStorageKey: string = "x-raygunapi";
 
   constructor(authStrategy: IAuthStrategy, saveTokenInBrowser: boolean = true) {
     this.authStrategy = authStrategy;
