@@ -1,19 +1,21 @@
 /** @format */
 
 import { IAuthStrategy, TokenManager } from "../auth";
-import * as Entities from "../entities";
 import { NetworkClient } from "../network";
+import * as Entities from "../entities";
 
 export class ApiClient {
   private tokenManager: TokenManager;
   private networkClient: NetworkClient;
 
   private alerts: Entities.Alerts;
+  private applications: Entities.Applications;
 
-  constructor(authStrategy: IAuthStrategy) {
-    this.tokenManager = new TokenManager(authStrategy);
+  constructor(authStrategy: IAuthStrategy, persistToken: boolean) {
+    this.tokenManager = new TokenManager(authStrategy, persistToken);
     this.networkClient = new NetworkClient(this.tokenManager);
     this.alerts = new Entities.Alerts(this.networkClient);
+    this.applications = new Entities.Applications(this.networkClient);
   }
 
   async authenticate(): Promise<string | undefined> {
@@ -27,6 +29,7 @@ export class ApiClient {
   getEntities() {
     return {
       Alerts: this.alerts,
+      Applications: this.applications,
     };
   }
 }

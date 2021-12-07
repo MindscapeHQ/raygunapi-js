@@ -1,13 +1,12 @@
 /** @format */
-
-import jwtDecode from "jwt-decode";
-
 import { JwtToken } from "./models";
 import { IAuthStrategy } from ".";
+import { wrapWithErrorHandler, decodeJwt } from "../network/utils";
 
 export class TokenManager {
   private authStrategy: IAuthStrategy;
   private token: string | undefined;
+  private decodedToken: JwtToken | undefined;
   private saveToBrowserStorage: boolean;
   private tokenStorageKey: string = "x-raygunapi";
 
@@ -16,12 +15,30 @@ export class TokenManager {
     this.saveToBrowserStorage = saveTokenInBrowser;
 
     if (saveTokenInBrowser) {
-      this.token = this.getTokenFromBrowserStorage();
+      const token = this.getTokenFromBrowserStorage();
+      if (token) {
+        this.token = token;
+        this.decodedToken = decodeJwt(token);
+      }
     }
   }
 
   async authenticate(): Promise<string | undefined> {
-    if (this.isTokenExpired() || !this.isTokenValid()) {
+    return await wrapWithErrorHandler(async () => {
+      if (this.isTokenExpired() || !this.isTokenValid()) {
+        const token = await this.authStrategy.authenticate();
+        if (token) {
+          this.saveToken(token);
+          return token;
+        }
+
+        return undefined;
+      }
+    });
+  }
+
+  async refreshToken(): Promise<string | undefined> {
+    return await wrapWithErrorHandler(async () => {
       const token = await this.authStrategy.authenticate();
       if (token) {
         this.saveToken(token);
@@ -29,21 +46,13 @@ export class TokenManager {
       }
 
       return undefined;
-    }
-  }
-
-  async refreshToken(): Promise<string | undefined> {
-    const token = await this.authStrategy.authenticate();
-    if (token) {
-      this.saveToken(token);
-      return token;
-    }
-
-    return undefined;
+    });
   }
 
   async getToken(): Promise<string | undefined> {
-    if (this.isTokenExpired() || !this.isTokenValid()) {
+    const isExpired = this.isTokenExpired();
+    const isValid = this.isTokenValid();
+    if (isExpired || !isValid) {
       return await this.refreshToken();
     }
 
@@ -57,6 +66,7 @@ export class TokenManager {
 
   private saveToken(token: string) {
     this.token = token;
+    this.decodedToken = decodeJwt(token);
 
     if (this.saveToBrowserStorage && localStorage) {
       localStorage.setItem(this.tokenStorageKey, token);
@@ -71,13 +81,12 @@ export class TokenManager {
   }
 
   private isTokenExpired(): boolean {
-    if (!this.token) {
+    if (!this.token || !this.decodedToken) {
       return true;
     }
 
     try {
-      const decodedToken = jwtDecode<JwtToken>(this.token);
-      const expiryTime = decodedToken.exp;
+      const expiryTime = this.decodedToken.exp;
       const now = new Date().getTime() / 1000;
       return now >= expiryTime;
     } catch (error) {
@@ -86,19 +95,11 @@ export class TokenManager {
   }
 
   private isTokenValid(): boolean {
-    if (!this.token) {
+    if (!this.token || !this.decodedToken) {
       return false;
     }
 
-    try {
-      const { raygun_planId, raygun_role } = jwtDecode<JwtToken>(this.token);
-      if (raygun_planId && raygun_role) {
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      return false;
-    }
+    const { raygun_role } = this.decodedToken;
+    return !!raygun_role;
   }
 }

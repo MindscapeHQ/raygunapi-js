@@ -14,7 +14,7 @@
     <script async>
       async function createRaygunClient() {
         const raygunClient = await Raygun.createClient({
-          userIdentifier: "1f0j70c",
+          userIdentifier: "",
           authStrategy: new Raygun.AuthStrategies.BasicAuthStrategy("", ""),
         });
 
@@ -23,13 +23,13 @@
       }
 
       async function fetchAlerts() {
-        const alerts = await raygunClient.Alerts.getAll("5n2");
+        const alerts = await raygunClient.Alerts.getAll("");
         window.alertId = alerts.entities[0].identifier;
         console.log("Alerts", alerts);
       }
 
       async function fetchAlert() {
-        const alert = await raygunClient.Alerts.get("5n2", window.alertId);
+        const alert = await raygunClient.Alerts.get("", window.alertId);
         console.log("Alert", alert);
       }
 
@@ -39,23 +39,28 @@
       }
 
       async function createAlert() {
-        const alert = await raygunClient.Alerts.create("5n2", {});
+        const alert = await raygunClient.Alerts.create("", {});
         console.log("Created alert", alert);
       }
 
       async function subscribeToAlert() {
-        const alert = await raygunClient.Alerts.subscribe("5n2", window.alertId);
+        const alert = await raygunClient.Alerts.subscribe("", window.alertId);
         console.log("Subscribed to alert");
       }
 
       async function unsubscribeToAlert() {
-        const alert = await raygunClient.Alerts.unsubscribe("5n2", window.alertId);
+        const alert = await raygunClient.Alerts.unsubscribe("", window.alertId);
         console.log("Unsubscribed to alert");
       }
 
       async function deleteAlert() {
-        const alert = await raygunClient.Alerts.delete("5n2", window.alertId);
+        const alert = await raygunClient.Alerts.delete("", window.alertId);
         console.log("Deleted alert");
+      }
+
+      async function fetchApplication() {
+        const apps = await raygunClient.Applications.get("", "");
+        console.log("Applications", apps);
       }
     </script>
   </head>
@@ -74,6 +79,11 @@
       <button onclick="deleteAlert()">Delete alert</button>
       <button onclick="subscribeToAlert()">Subscribe to alert</button>
       <button onclick="unsubscribeToAlert()">Unsubscribed to alert</button>
+    </section>
+
+    <section>
+      <h2>Applications</h2>
+      <button onclick="fetchApplication()">Get application</button>
     </section>
   </body>
 </html>

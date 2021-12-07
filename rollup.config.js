@@ -18,13 +18,15 @@ const input = ["lib/index.ts"];
 
 const umdBuildConfig = {
   input,
-  external: ['jwt-decode', 'jwtDecode'],
   plugins: [
     json(),
     typescript({
       useTsconfigDeclarationDir: true
     }),
     nodeResolve(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
     babel({
       babelHelpers: "bundled"
     }),
@@ -64,13 +66,12 @@ const esmCommonJsConfigLatest = {
     typescript({
       useTsconfigDeclarationDir: true,
     }),
-    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-    commonjs(),
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     nodeResolve(),
-
+    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
+    commonjs(),
     // Resolve source maps to the original source
     sourceMaps(),
   ],

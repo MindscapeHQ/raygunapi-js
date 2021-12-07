@@ -1,7 +1,6 @@
 /** @format */
 
-import { ApiClient } from "../api";
-import { Alerts } from "../entities";
+import * as Entities from "../entities";
 import * as Models from ".";
 
 type IPageLink = {
@@ -21,8 +20,12 @@ export type IPagedEntity<T> = {
   totalCount: number;
 };
 
-export type IRaygunApiClient = {
-  apiClient: typeof ApiClient;
-  Alerts: typeof Alerts;
+/**
+ * The Raygun API client object
+ */
+export type IRaygunClient = {
+  authenticate: () => Promise<string | undefined>;
+  refreshToken: () => Promise<string | undefined>;
+  Alerts: Entities.Alerts;
   Models: typeof Models;
 };
