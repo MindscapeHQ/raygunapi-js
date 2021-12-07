@@ -1,14 +1,12 @@
 /** @format */
-
-import jwtDecode from "jwt-decode";
-
 import { JwtToken } from "./models";
 import { IAuthStrategy } from ".";
-import { wrapWithErrorHandler } from "../network/utils";
+import { wrapWithErrorHandler, decodeJwt } from "../network/utils";
 
 export class TokenManager {
   private authStrategy: IAuthStrategy;
   private token: string | undefined;
+  private decodedToken: JwtToken | undefined;
   private saveToBrowserStorage: boolean;
   private tokenStorageKey: string = "x-raygnapi";
 
@@ -17,7 +15,11 @@ export class TokenManager {
     this.saveToBrowserStorage = saveTokenInBrowser;
 
     if (saveTokenInBrowser) {
-      this.token = this.getTokenFromBrowserStorage();
+      const token = this.getTokenFromBrowserStorage();
+      if (token) {
+        this.token = token;
+        this.decodedToken = decodeJwt(token);
+      }
     }
   }
 
@@ -62,6 +64,7 @@ export class TokenManager {
 
   private saveToken(token: string) {
     this.token = token;
+    this.decodedToken = decodeJwt(token);
 
     if (this.saveToBrowserStorage && localStorage) {
       localStorage.setItem(this.tokenStorageKey, token);
@@ -76,13 +79,12 @@ export class TokenManager {
   }
 
   private isTokenExpired(): boolean {
-    if (!this.token) {
+    if (!this.token || !this.decodedToken) {
       return true;
     }
 
     try {
-      const decodedToken = jwtDecode<JwtToken>(this.token);
-      const expiryTime = decodedToken.exp;
+      const expiryTime = this.decodedToken.exp;
       const now = new Date().getTime() / 1000;
       return now >= expiryTime;
     } catch (error) {
@@ -91,12 +93,12 @@ export class TokenManager {
   }
 
   private isTokenValid(): boolean {
-    if (!this.token) {
+    if (!this.token || !this.decodedToken) {
       return false;
     }
 
     try {
-      const { raygun_planId, raygun_role } = jwtDecode<JwtToken>(this.token);
+      const { raygun_planId, raygun_role } = this.decodedToken;
       if (raygun_planId && raygun_role) {
         return true;
       }

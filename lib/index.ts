@@ -9,14 +9,15 @@ export type IClientOptions = {
   userIdentifier: string;
   logFunc?: (message: any) => void;
   apiUrl?: string;
+  persistToken?: boolean;
 };
 
-export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "https://publicapi.raygun.com/api/v2" }: IClientOptions): Models.IRaygunClient {
+export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "https://publicapi.raygun.com/api/v2", persistToken = true }: IClientOptions): Models.IRaygunClient {
   GlobalConfig.userIdentifier = userIdentifier;
   GlobalConfig.logFunc = logFunc;
   GlobalConfig.apiUrl = apiUrl;
 
-  const apiClient = new ApiClient(authStrategy);
+  const apiClient = new ApiClient(authStrategy, persistToken);
 
   const authenticate: () => Promise<string | undefined> = async () => apiClient.authenticate();
   const refreshToken: () => Promise<string | undefined> = async () => apiClient.refreshToken();
