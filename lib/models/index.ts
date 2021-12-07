@@ -2,7 +2,7 @@
 
 import { ApiClient } from "../api";
 import { Alerts } from "../entities";
-import * as Models from "../models";
+import * as Models from ".";
 
 type IPageLink = {
   href: string;

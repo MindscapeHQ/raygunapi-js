@@ -8,15 +8,19 @@ import {
   terser
 } from "rollup-plugin-terser";
 import babel from "@rollup/plugin-babel";
+import json from 'rollup-plugin-json';
+import commonjs from 'rollup-plugin-commonjs';
+import sourceMaps from 'rollup-plugin-sourcemaps';
 
 import pkg from "./package.json";
 
-const input = ["src/index.ts"];
+const input = ["lib/index.ts"];
 
 const umdBuildConfig = {
   input,
-  external: ['lodash'],
+  external: ['jwt-decode', 'jwtDecode'],
   plugins: [
+    json(),
     typescript({
       useTsconfigDeclarationDir: true
     }),
@@ -28,7 +32,7 @@ const umdBuildConfig = {
     terser()
   ],
   output: {
-    file: `dist/umd/${pkg.name}.min.js`,
+    file: pkg.browser,
     format: "umd",
     name: `${pkg.displayName}`, // this is the name of the global object
     esModule: false,
@@ -37,28 +41,39 @@ const umdBuildConfig = {
   }
 };
 
-const esmCommonJsConfig = {
+const esmCommonJsConfigLatest = {
   input,
-  external: ['lodash'],
-  plugins: [
-    typescript({
-      useTsconfigDeclarationDir: true
-    }),
-    nodeResolve()
-  ],
   output: [{
-      dir: "dist/esm",
-      format: "esm",
-      exports: "named",
+      file: pkg.main,
+      name: pkg.displayName,
+      format: 'cjs',
       sourcemap: true,
     },
     {
-      dir: "dist/commonjs",
-      format: "cjs",
-      exports: "named",
+      file: pkg.module,
+      format: 'es',
       sourcemap: true,
     },
   ],
+  // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
+  external: ['jwt-decode', 'jwtDecode'],
+  plugins: [
+    // Allow json resolution
+    json(),
+    // Compile TypeScript files
+    typescript({
+      useTsconfigDeclarationDir: true,
+    }),
+    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
+    commonjs(),
+    // Allow node_modules resolution, so you can use 'external' to control
+    // which external modules to include in the bundle
+    // https://github.com/rollup/rollup-plugin-node-resolve#usage
+    nodeResolve(),
+
+    // Resolve source maps to the original source
+    sourceMaps(),
+  ],
 }
 
-export default [umdBuildConfig, esmCommonJsConfig];
+export default [umdBuildConfig, esmCommonJsConfigLatest];

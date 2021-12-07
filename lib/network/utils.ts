@@ -6,15 +6,17 @@ import { IQueryParams } from "./models";
 /**
  * Adds general headers to a RequestInit object.
  * @param options request options to be extended
+ * @param jwtToken a valid JWT token
  * @returns a RequestInit object with added headers
  */
-export function addHTTPHeaders(options: RequestInit): RequestInit {
+export function addHTTPHeaders(options: RequestInit, jwtToken: string): RequestInit {
   return {
     headers: {
       Accept: "application/json, text/plain, */*;",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${GlobalConfig.jwtToken}`,
+      Authorization: `Bearer ${jwtToken}`,
     },
+    mode: "cors",
     ...options,
   };
 }
@@ -41,4 +43,12 @@ export function addQueryStringParams(url: string, params: IQueryParams): string 
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     .join("&");
   return `${url}?${queryString}`;
+}
+
+export async function wrapWithErrorHandler<T>(method: () => T): Promise<T | null> {
+  try {
+    return await method();
+  } catch (err) {
+    return null;
+  }
 }
