@@ -50,7 +50,9 @@ export class TokenManager {
   }
 
   async getToken(): Promise<string | undefined> {
-    if (this.isTokenExpired() || !this.isTokenValid()) {
+    const isExpired = this.isTokenExpired();
+    const isValid = this.isTokenValid();
+    if (isExpired || !isValid) {
       return await this.refreshToken();
     }
 
@@ -97,15 +99,7 @@ export class TokenManager {
       return false;
     }
 
-    try {
-      const { raygun_planId, raygun_role } = this.decodedToken;
-      if (raygun_planId && raygun_role) {
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      return false;
-    }
+    const { raygun_role } = this.decodedToken;
+    return !!raygun_role;
   }
 }

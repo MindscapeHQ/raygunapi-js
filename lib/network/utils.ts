@@ -1,5 +1,6 @@
 /** @format */
 
+import { JwtToken } from "../auth/models";
 import { GlobalConfig } from "../config";
 import { IQueryParams } from "./models";
 
@@ -60,4 +61,36 @@ export async function wrapWithErrorHandler<T>(method: () => T): Promise<T | unde
 
     return Promise.resolve(undefined);
   }
+}
+
+/**
+ * Decode a given JWT token to get it's encoded data.
+ * @param token JWT token to be decoded
+ * @returns an object containing the decoded data from the JWT token
+ */
+export function decodeJwt(token: string): JwtToken {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  return JSON.parse(atob(base64));
+}
+
+/**
+ * Decode a Base64 string into
+ * @param a - A binary string containing a base64 encoded value.
+ * @returns An ASCII string containing decoded data from the base64 input string.
+ */
+function atob(a: string): string {
+  if (isBrowserEnv()) {
+    return window.atob(a);
+  } else {
+    return Buffer.from(a, "base64").toString("binary");
+  }
+}
+
+/**
+ * Checks whether the sdk is running in a browser or node environment.
+ * @returns boolean indicating if the current environment is a browser
+ */
+function isBrowserEnv() {
+  return ![typeof window, typeof document].includes("undefined");
 }
