@@ -24,6 +24,10 @@ export enum IAlertActionType {
   User = "User",
 }
 
+export enum IAlertActionSettingType {
+  UserId = "UserId",
+}
+
 export enum IAlertTargetType {
   Applications = "Applications",
 }
@@ -43,7 +47,7 @@ export enum IAlertComparator {
 }
 
 export type IActionSetting = {
-  type: IAlertActionType;
+  type: IAlertActionSettingType;
   value: string;
 };
 

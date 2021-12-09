@@ -60,7 +60,7 @@ export class Alerts {
    * @param alert - The alert to create
    * @returns The created alert
    */
-  async create(planIdentifier: string, alert: IAlert): Promise<IAlert | undefined> {
+  async create(planIdentifier: string, alert: Omit<IAlert, "identifier" | "planIdentifier">): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl];
 
     var queryParams: Models.IQueryParams = {
