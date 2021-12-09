@@ -77,5 +77,4 @@ class NetworkClient {
   }
 }
 
-export { NetworkClient, buildApiUrl };
-export * as Models from "./models";
+export { NetworkClient, buildApiUrl, Models };
