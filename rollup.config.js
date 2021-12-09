@@ -24,9 +24,7 @@ const umdBuildConfig = {
       useTsconfigDeclarationDir: true
     }),
     nodeResolve(),
-    commonjs({
-      include: 'node_modules/**',
-    }),
+    commonjs(),
     babel({
       babelHelpers: "bundled"
     }),
@@ -58,7 +56,7 @@ const esmCommonJsConfigLatest = {
     },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: ['jwt-decode', 'jwtDecode'],
+  external: [],
   plugins: [
     // Allow json resolution
     json(),
