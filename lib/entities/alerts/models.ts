@@ -1,6 +1,6 @@
 /** @format */
 
-enum AlertInterval {
+export enum IAlertInterval {
   None = "None",
   OneMinute = "OneMinute",
   FiveMinutes = "FiveMinutes",
@@ -8,7 +8,7 @@ enum AlertInterval {
   ThirtyMinutes = "ThirtyMinutes",
 }
 
-enum ConditionType {
+export enum IAlertConditionType {
   NewErrorGroupsCount = "NewErrorGroupsCount",
   ReoccurredErrorGroupsCount = "ReoccurredErrorGroupsCount",
   ErrorInstanceCount = "ErrorInstanceCount",
@@ -20,15 +20,15 @@ enum ConditionType {
   CumulativeLayoutShiftAverage = "CumulativeLayoutShiftAverage",
 }
 
-enum ActionType {
+export enum IAlertActionType {
   User = "User",
 }
 
-enum TargetType {
+export enum IAlertTargetType {
   Applications = "Applications",
 }
 
-enum FilterType {
+export enum IAlertFilterType {
   ErrorMessage = "ErrorMessage",
   Tags = "Tags",
   Version = "Version",
@@ -37,35 +37,35 @@ enum FilterType {
   EventPlatform = "EventPlatform",
 }
 
-enum Comparator {
+export enum IAlertComparator {
   Equals = "Equals",
   Contains = "Contains",
 }
 
-type IActionSetting = {
-  type: ActionType;
+export type IActionSetting = {
+  type: IAlertActionType;
   value: string;
 };
 
-type IAlertAction = {
-  type: ActionType;
+export type IAlertAction = {
+  type: IAlertActionType;
   actionSettings: IActionSetting[];
 };
 
-type IAlertTarget = {
-  type: TargetType;
+export type IAlertTarget = {
+  type: IAlertTargetType;
   value: string;
 };
 
-type IAlertFilter = {
-  type: FilterType;
-  comparator: Comparator;
+export type IAlertFilter = {
+  type: IAlertFilterType;
+  comparator: IAlertComparator;
   value: string;
 };
 
-type IAlertCondition = {
-  type: ConditionType;
-  interval: AlertInterval;
+export type IAlertCondition = {
+  type: IAlertConditionType;
+  interval: IAlertInterval;
   threshold: number;
   filters: IAlertFilter[];
 };
