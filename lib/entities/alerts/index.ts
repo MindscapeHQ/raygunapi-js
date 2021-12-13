@@ -3,8 +3,10 @@ import { GlobalConfig } from "../../config";
 import { Models, buildApiUrl, NetworkClient } from "../../network";
 import { IPagedEntity } from "../../models";
 
-import { IAlert, IAlertSummary } from "./models";
+import { IAlert, IAlertSummary, ICreateAlertPayload, IUpdateAlertPayload } from "./models";
 import { wrapWithErrorHandler } from "../../network/utils";
+
+export * from "./enums";
 
 export class Alerts {
   baseUrl: string = "alerts";
@@ -60,7 +62,7 @@ export class Alerts {
    * @param alert - The alert to create
    * @returns The created alert
    */
-  async create(planIdentifier: string, alert: Omit<IAlert, "identifier" | "planIdentifier">): Promise<IAlert | undefined> {
+  async create(planIdentifier: string, alert: ICreateAlertPayload): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl];
 
     var queryParams: Models.IQueryParams = {
@@ -77,11 +79,12 @@ export class Alerts {
   /**
    * Create a new alert for the given plan
    * @param planIdentifier - Identifier of the target plan
+   * @param alertIdentifier - Identifier of the alert to update
    * @param alert - The new version of the alert
    * @returns The updated alert
    */
-  async update(planIdentifier: string, alert: IAlert): Promise<IAlert | undefined> {
-    let urlSegments = [planIdentifier, this.baseUrl, alert.identifier];
+  async update(planIdentifier: string, alertIdentifier: string, alert: IUpdateAlertPayload): Promise<IAlert | undefined> {
+    let urlSegments = [planIdentifier, this.baseUrl, alertIdentifier];
 
     var queryParams: Models.IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,

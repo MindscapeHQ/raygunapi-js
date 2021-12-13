@@ -1,75 +1,31 @@
 /** @format */
 
-export enum IAlertInterval {
-  None = "None",
-  OneMinute = "OneMinute",
-  FiveMinutes = "FiveMinutes",
-  TenMinutes = "TenMinutes",
-  ThirtyMinutes = "ThirtyMinutes",
-}
-
-export enum IAlertConditionType {
-  NewErrorGroupsCount = "NewErrorGroupsCount",
-  ReoccurredErrorGroupsCount = "ReoccurredErrorGroupsCount",
-  ErrorInstanceCount = "ErrorInstanceCount",
-  ErrorInstancesPerGroupCount = "ErrorInstancesPerGroupCount",
-  LoadTimeAverage = "LoadTimeAverage",
-  FirstContentfulPaintAverage = "FirstContentfulPaintAverage",
-  LargestContentfulPaintAverage = "LargestContentfulPaintAverage",
-  FirstInputDelayAverage = "FirstInputDelayAverage",
-  CumulativeLayoutShiftAverage = "CumulativeLayoutShiftAverage",
-}
-
-export enum IAlertActionType {
-  User = "User",
-}
-
-export enum IAlertActionSettingType {
-  UserId = "UserId",
-}
-
-export enum IAlertTargetType {
-  Applications = "Applications",
-}
-
-export enum IAlertFilterType {
-  ErrorMessage = "ErrorMessage",
-  Tags = "Tags",
-  Version = "Version",
-  EventUri = "EventUri",
-  EventCountry = "EventCountry",
-  EventPlatform = "EventPlatform",
-}
-
-export enum IAlertComparator {
-  Equals = "Equals",
-  Contains = "Contains",
-}
+import { AlertActionSettingType, AlertActionType, AlertComparator, AlertConditionType, AlertFilterType, AlertInterval, AlertTargetType } from "./enums";
 
 export type IActionSetting = {
-  type: IAlertActionSettingType;
+  type: AlertActionSettingType;
   value: string;
 };
 
 export type IAlertAction = {
-  type: IAlertActionType;
+  type: AlertActionType;
   actionSettings: IActionSetting[];
 };
 
 export type IAlertTarget = {
-  type: IAlertTargetType;
+  type: AlertTargetType;
   value: string;
 };
 
 export type IAlertFilter = {
-  type: IAlertFilterType;
-  comparator: IAlertComparator;
+  type: AlertFilterType;
+  comparator: AlertComparator;
   value: string;
 };
 
 export type IAlertCondition = {
-  type: IAlertConditionType;
-  interval: IAlertInterval;
+  type: AlertConditionType;
+  interval: AlertInterval;
   threshold: number;
   filters: IAlertFilter[];
 };
@@ -98,3 +54,13 @@ export type IAlertSummary = {
   name: string;
   isSubscribed: boolean;
 };
+
+/**
+ * Represents the payload required to create an alert.
+ */
+export type ICreateAlertPayload = Omit<IAlert, "identifier" | "planIdentifier" | "hiddenApplicationCount" | "customSubjectLine">;
+
+/**
+ * Represents the payload required to update an alert.
+ */
+export type IUpdateAlertPayload = Omit<IAlert, "identifier" | "planIdentifier" | "hiddenApplicationCount" | "customSubjectLine">;

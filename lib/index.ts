@@ -4,6 +4,8 @@ import { AuthStrategies, IAuthStrategy } from "./auth";
 import * as Models from "./models";
 import { GlobalConfig } from "./config";
 
+export * from "./entities/alerts/enums";
+
 export type IClientOptions = {
   authStrategy: IAuthStrategy;
   userIdentifier: string;
