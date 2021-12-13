@@ -11,11 +11,10 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "preserveConstEnums": true,
+    "preserveConstEnums": false,
     "declarationDir": "dist/types",
     "outDir": "dist/lib",
     "typeRoots": ["node_modules/@types"]
   },
   "include": ["lib"]
-  // "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
 }

@@ -1,7 +1,7 @@
 /** @format */
 import { ApiClient } from "./api";
 import { AuthStrategies, IAuthStrategy } from "./auth";
-import * as Models from "./models";
+import { IRaygunClient } from "./models";
 import { GlobalConfig } from "./config";
 
 export * from "./entities/alerts/enums";
@@ -14,7 +14,7 @@ export type IClientOptions = {
   persistToken?: boolean;
 };
 
-export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "https://publicapi.raygun.com/api/v2", persistToken = true }: IClientOptions): Models.IRaygunClient {
+export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "https://publicapi.raygun.com/api/v2", persistToken = true }: IClientOptions): IRaygunClient {
   GlobalConfig.userIdentifier = userIdentifier;
   GlobalConfig.logFunc = logFunc;
   GlobalConfig.apiUrl = apiUrl;
@@ -29,8 +29,7 @@ export function createClient({ authStrategy, userIdentifier, logFunc, apiUrl = "
     authenticate,
     refreshToken,
     ...entities,
-    Models,
   };
 }
 
-export { AuthStrategies, Models };
+export { AuthStrategies };

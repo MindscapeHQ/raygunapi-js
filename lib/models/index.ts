@@ -1,7 +1,6 @@
 /** @format */
 
-import * as Entities from "../entities";
-import * as Models from ".";
+import { Alerts } from "../entities";
 
 type IPageLink = {
   href: string;
@@ -26,6 +25,5 @@ export type IPagedEntity<T> = {
 export type IRaygunClient = {
   authenticate: () => Promise<string | undefined>;
   refreshToken: () => Promise<string | undefined>;
-  Alerts: Entities.Alerts;
-  Models: typeof Models;
+  Alerts: Alerts;
 };

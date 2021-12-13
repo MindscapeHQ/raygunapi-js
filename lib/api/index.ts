@@ -2,20 +2,20 @@
 
 import { IAuthStrategy, TokenManager } from "../auth";
 import { NetworkClient } from "../network";
-import * as Entities from "../entities";
+import { Alerts, Applications } from "../entities";
 
 export class ApiClient {
   private tokenManager: TokenManager;
   private networkClient: NetworkClient;
 
-  private alerts: Entities.Alerts;
-  private applications: Entities.Applications;
+  private alerts: Alerts;
+  private applications: Applications;
 
   constructor(authStrategy: IAuthStrategy, persistToken: boolean) {
     this.tokenManager = new TokenManager(authStrategy, persistToken);
     this.networkClient = new NetworkClient(this.tokenManager);
-    this.alerts = new Entities.Alerts(this.networkClient);
-    this.applications = new Entities.Applications(this.networkClient);
+    this.alerts = new Alerts(this.networkClient);
+    this.applications = new Applications(this.networkClient);
   }
 
   async authenticate(): Promise<string | undefined> {

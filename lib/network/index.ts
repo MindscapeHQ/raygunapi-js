@@ -1,6 +1,6 @@
 /** @format */
 import { TokenManager } from "../auth";
-import * as Models from "./models";
+import { IQueryParams, HTTPMethods } from "./models";
 import { addHTTPHeaders, addQueryStringParams, buildApiUrl } from "./utils";
 
 class NetworkClient {
@@ -16,8 +16,8 @@ class NetworkClient {
    * @param options - optional options to pass to fetch
    * @returns The response returned for the request.
    */
-  public async get<T>(url: string, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
-    return await this.executeRequest(Models.HTTPMethods.GET, url, queryStringParameters, options);
+  public async get<T>(url: string, queryStringParameters?: IQueryParams, options?: RequestInit): Promise<T> {
+    return await this.executeRequest(HTTPMethods.GET, url, queryStringParameters, options);
   }
 
   /**
@@ -27,8 +27,8 @@ class NetworkClient {
    * @param options - optional options to pass to fetch api
    * @returns The response returned for the request.
    */
-  public async post<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
-    return await this.executeRequest(Models.HTTPMethods.POST, url, queryStringParameters, options, payload);
+  public async post<T>(url: string, payload: any, queryStringParameters?: IQueryParams, options?: RequestInit): Promise<T> {
+    return await this.executeRequest(HTTPMethods.POST, url, queryStringParameters, options, payload);
   }
 
   /**
@@ -38,8 +38,8 @@ class NetworkClient {
    * @param options - optional options to pass to fetch api
    * @returns The response returned for the request.
    */
-  public async put<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
-    return await this.executeRequest(Models.HTTPMethods.PUT, url, queryStringParameters, options, payload);
+  public async put<T>(url: string, payload: any, queryStringParameters?: IQueryParams, options?: RequestInit): Promise<T> {
+    return await this.executeRequest(HTTPMethods.PUT, url, queryStringParameters, options, payload);
   }
 
   /**
@@ -48,11 +48,11 @@ class NetworkClient {
    * @param options - optional options to pass to fetch api
    * @returns The response returned for the request.
    */
-  public async deleteFromApi<T>(url: string, payload: any, queryStringParameters?: Models.IQueryParams, options?: RequestInit): Promise<T> {
-    return await this.executeRequest(Models.HTTPMethods.DELETE, url, queryStringParameters, options, payload);
+  public async deleteFromApi<T>(url: string, payload: any, queryStringParameters?: IQueryParams, options?: RequestInit): Promise<T> {
+    return await this.executeRequest(HTTPMethods.DELETE, url, queryStringParameters, options, payload);
   }
 
-  private async executeRequest<T>(method: Models.HTTPMethods, url: string, queryStringParameters?: Models.IQueryParams, options?: RequestInit, payload?: any): Promise<T> {
+  private async executeRequest<T>(method: HTTPMethods, url: string, queryStringParameters?: IQueryParams, options?: RequestInit, payload?: any): Promise<T> {
     const jwtToken = (await this.tokenManager.getToken()) || "";
     var _options = addHTTPHeaders({ method }, jwtToken);
 
@@ -77,4 +77,4 @@ class NetworkClient {
   }
 }
 
-export { NetworkClient, buildApiUrl, Models };
+export { NetworkClient, buildApiUrl, IQueryParams, HTTPMethods };

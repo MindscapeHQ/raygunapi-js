@@ -83,6 +83,7 @@ function atob(a: string): string {
   if (isBrowserEnv()) {
     return window.atob(a);
   } else {
+    // @ts-ignore
     return Buffer.from(a, "base64").toString("binary");
   }
 }

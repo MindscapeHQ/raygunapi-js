@@ -1,6 +1,6 @@
 /** @format */
 import { GlobalConfig } from "../../config";
-import { Models, buildApiUrl, NetworkClient } from "../../network";
+import { buildApiUrl, IQueryParams, NetworkClient } from "../../network";
 import { IPagedEntity } from "../../models";
 
 import { IAlert, IAlertSummary, ICreateAlertPayload, IUpdateAlertPayload } from "./models";
@@ -44,7 +44,7 @@ export class Alerts {
   async getAll(planIdentifier: string, subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | undefined> {
     const urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, planIdentifier];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       subscribedOnly,
       page,
       pageSize,
@@ -65,7 +65,7 @@ export class Alerts {
   async create(planIdentifier: string, alert: ICreateAlertPayload): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,
     };
 
@@ -86,7 +86,7 @@ export class Alerts {
   async update(planIdentifier: string, alertIdentifier: string, alert: IUpdateAlertPayload): Promise<IAlert | undefined> {
     let urlSegments = [planIdentifier, this.baseUrl, alertIdentifier];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,
     };
 
@@ -106,7 +106,7 @@ export class Alerts {
   async subscribe(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier, "subscribe"];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,
     };
 
@@ -125,7 +125,7 @@ export class Alerts {
   async unsubscribe(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier, "unsubscribe"];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,
     };
 
@@ -143,7 +143,7 @@ export class Alerts {
   async delete(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier];
 
-    var queryParams: Models.IQueryParams = {
+    var queryParams: IQueryParams = {
       userIdentifier: GlobalConfig.userIdentifier,
     };
 
