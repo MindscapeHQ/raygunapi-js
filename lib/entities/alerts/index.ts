@@ -42,7 +42,7 @@ export class Alerts {
    * @returns An array of {AlertSummary} objects
    */
   async getAll(planIdentifier: string, subscribedOnly: boolean = false, page: number = 1, pageSize = 20): Promise<IPagedEntity<IAlertSummary> | undefined> {
-    const urlSegments = ["user", GlobalConfig.userIdentifier, this.baseUrl, planIdentifier];
+    const urlSegments = ["plans", planIdentifier, this.baseUrl];
 
     var queryParams: IQueryParams = {
       subscribedOnly,
