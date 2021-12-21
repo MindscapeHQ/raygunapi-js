@@ -11,27 +11,27 @@
     <script async src="../../dist/umd/index.min.js"></script>
     <!-- <script async src="https://cdn.raygun.io/sdk/index.min.js"></script> -->
 
-    <script async>
-      async function createRaygunClient() {
-        const raygunClient = await Raygun.createClient({
-          userIdentifier: "",
-          authStrategy: new Raygun.AuthStrategies.BasicAuthStrategy("", ""),
-        });
+  <script async>
+    async function createRaygunClient() {
+      const raygunClient = await RaygunSDK.createClient({
+        userIdentifier: "1hzwg82",
+        authStrategy: new RaygunSDK.AuthStrategies.BasicAuthStrategy("99d486e7d6f24772", "435b43ae-dd2c-43ab-a3e1-d11d3a5be19b"),
+      });
 
-        console.log("Client created", raygunClient);
-        window.raygunClient = raygunClient;
-      }
+      console.log("Client created", raygunClient);
+      window.raygunClient = raygunClient;
+    }
 
-      async function fetchAlerts() {
-        const alerts = await raygunClient.Alerts.getAll("");
-        window.alertId = alerts.entities[0].identifier;
-        console.log("Alerts", alerts);
-      }
+    async function fetchAlerts() {
+      const alerts = await raygunClient.Alerts.getAll("5n2");
+      window.alertId = "28oyb6u";
+      console.log("Alerts", alerts);
+    }
 
-      async function fetchAlert() {
-        const alert = await raygunClient.Alerts.get("", window.alertId);
-        console.log("Alert", alert);
-      }
+    async function fetchAlert() {
+      const alert = await raygunClient.Alerts.get("5n2", window.alertId);
+      console.log("Alert", alert);
+    }
 
       async function refreshAuthToken() {
         const token = await raygunClient.refreshToken();
@@ -59,7 +59,8 @@
       }
 
       async function fetchApplication() {
-        const apps = await raygunClient.Applications.get("", "");
+        // const apps = await raygunClient.Applications.get("5n2","dbvowl");
+        const apps = await raygunClient.Plans.getAllApplications("5n2");
         console.log("Applications", apps);
       }
     </script>
