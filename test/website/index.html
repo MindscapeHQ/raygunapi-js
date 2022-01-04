@@ -24,7 +24,7 @@
 
     async function fetchAlerts() {
       const alerts = await raygunClient.Alerts.getAll("");
-      window.alertId = "";
+      window.alertId = alerts.entities[0].identifier;
       console.log("Alerts", alerts);
     }
 
