@@ -1,4 +1,4 @@
-/** @format */
+/** @format **/
 
 import { buildApiUrl, NetworkClient } from "../../network";
 import { wrapWithErrorHandler } from "../../network/utils";

@@ -3,7 +3,6 @@
 import { buildApiUrl, NetworkClient } from "../../network";
 import { wrapWithErrorHandler } from "../../network/utils";
 import { IApplication } from "./models";
-import { IApplications } from "../plans/models";
 
 export class Applications {
   networkClient: NetworkClient;

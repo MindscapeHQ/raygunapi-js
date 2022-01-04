@@ -13,9 +13,9 @@
 
   <script async>
     async function createRaygunClient() {
-      const raygunClient = await RaygunSDK.createClient({
-        userIdentifier: "1hzwg82",
-        authStrategy: new RaygunSDK.AuthStrategies.BasicAuthStrategy("99d486e7d6f24772", "435b43ae-dd2c-43ab-a3e1-d11d3a5be19b"),
+      const raygunClient = await Raygun.createClient({
+        userIdentifier: "",
+        authStrategy: new Raygun.AuthStrategies.BasicAuthStrategy("", ""),
       });
 
       console.log("Client created", raygunClient);
@@ -23,13 +23,13 @@
     }
 
     async function fetchAlerts() {
-      const alerts = await raygunClient.Alerts.getAll("5n2");
-      window.alertId = "28oyb6u";
+      const alerts = await raygunClient.Alerts.getAll("");
+      window.alertId = "";
       console.log("Alerts", alerts);
     }
 
     async function fetchAlert() {
-      const alert = await raygunClient.Alerts.get("5n2", window.alertId);
+      const alert = await raygunClient.Alerts.get("", window.alertId);
       console.log("Alert", alert);
     }
 
