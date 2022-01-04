@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9a11ccb-cf9e-48a6-ba0f-5eac79fc3b16" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/entities/applications/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/entities/applications/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/entities/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/entities/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/website/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5249428">
+    <splitter split-orientation="horizontal" split-proportion="0.49656752">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -85,8 +81,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/lib/entities/applications/index.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="988">
-                  <caret line="44" column="3" lean-forward="true" selection-start-line="44" selection-start-column="3" selection-end-line="44" selection-end-column="3" />
+                <state relative-caret-position="754">
+                  <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
                   <folding>
                     <element signature="e#16#75#0" expanded="true" />
                   </folding>
@@ -110,8 +106,17 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/website/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="532">
-                  <caret line="51" column="80" lean-forward="true" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
+                <state relative-caret-position="650">
+                  <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dist/cjs/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="379">
+                  <caret line="251" column="4" selection-start-line="251" selection-start-column="4" selection-end-line="251" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -159,6 +164,7 @@
       <find>getEntities</find>
       <find>this.alerts =</find>
       <find>s = [&quot;</find>
+      <find>AuthStrategies</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,17 +181,17 @@
         <option value="$PROJECT_DIR$/lib/entities/plans/models.ts" />
         <option value="$PROJECT_DIR$/lib/api/index.ts" />
         <option value="$PROJECT_DIR$/lib/entities/index.ts" />
-        <option value="$PROJECT_DIR$/lib/entities/applications/index.ts" />
         <option value="$PROJECT_DIR$/lib/entities/plans/index.ts" />
+        <option value="$PROJECT_DIR$/lib/entities/applications/index.ts" />
         <option value="$PROJECT_DIR$/test/website/index.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2552" />
-    <option name="y" value="-8" />
-    <option name="width" value="2576" />
-    <option name="height" value="1416" />
+    <option name="x" value="3283" />
+    <option name="y" value="86" />
+    <option name="width" value="1453" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -208,7 +214,20 @@
               <item name="raygunapi-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="raygunapi-js" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="raygunapi-js" type="b2602c69:ProjectViewProjectNode" />
+              <item name="raygunapi-js" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="raygunapi-js" type="b2602c69:ProjectViewProjectNode" />
+              <item name="raygunapi-js" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="applications" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="raygunapi-js" type="b2602c69:ProjectViewProjectNode" />
@@ -293,18 +312,18 @@
       <workItem from="1639646041277" duration="1608000" />
       <workItem from="1639684934183" duration="1642000" />
       <workItem from="1639688416589" duration="9204000" />
-      <workItem from="1639971783480" duration="13838000" />
+      <workItem from="1639971783480" duration="18981000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26292000" />
+    <option name="totallyTimeSpent" value="31435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2552" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13908589" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13908589" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -455,13 +474,6 @@
     <entry file="file://$PROJECT_DIR$/lib/api/models.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/cjs/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="560" column="4" selection-start-line="560" selection-start-column="4" selection-end-line="560" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/config/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -504,20 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="658">
           <caret line="33" column="1" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/entities/applications/models.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/esm/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="978" column="12" selection-start-line="978" selection-start-column="12" selection-end-line="978" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -572,20 +570,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/website/index.html">
+    <entry file="file://$PROJECT_DIR$/dist/esm/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="51" column="80" lean-forward="true" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
+        <state relative-caret-position="406">
+          <caret line="978" column="12" selection-start-line="978" selection-start-column="12" selection-end-line="978" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/cjs/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="251" column="4" selection-start-line="251" selection-start-column="4" selection-end-line="251" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/entities/applications/models.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/entities/applications/index.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="44" column="3" lean-forward="true" selection-start-line="44" selection-start-column="3" selection-end-line="44" selection-end-column="3" />
+        <state relative-caret-position="754">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
           <folding>
             <element signature="e#16#75#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/website/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>

@@ -33,36 +33,40 @@
       console.log("Alert", alert);
     }
 
-      async function refreshAuthToken() {
-        const token = await raygunClient.refreshToken();
-        console.log("Refreshed auth token", token);
-      }
+    async function refreshAuthToken() {
+      const token = await raygunClient.refreshToken();
+      console.log("Refreshed auth token", token);
+    }
 
-      async function createAlert() {
-        const alert = await raygunClient.Alerts.create("", {});
-        console.log("Created alert", alert);
-      }
+    async function createAlert() {
+      const alert = await raygunClient.Alerts.create("", {});
+      console.log("Created alert", alert);
+    }
 
-      async function subscribeToAlert() {
-        const alert = await raygunClient.Alerts.subscribe("", window.alertId);
-        console.log("Subscribed to alert");
-      }
+    async function subscribeToAlert() {
+      const alert = await raygunClient.Alerts.subscribe("", window.alertId);
+      console.log("Subscribed to alert");
+    }
 
-      async function unsubscribeToAlert() {
-        const alert = await raygunClient.Alerts.unsubscribe("", window.alertId);
-        console.log("Unsubscribed to alert");
-      }
+    async function unsubscribeToAlert() {
+      const alert = await raygunClient.Alerts.unsubscribe("", window.alertId);
+      console.log("Unsubscribed to alert");
+    }
 
-      async function deleteAlert() {
-        const alert = await raygunClient.Alerts.delete("", window.alertId);
-        console.log("Deleted alert");
-      }
+    async function deleteAlert() {
+      const alert = await raygunClient.Alerts.delete("", window.alertId);
+      console.log("Deleted alert");
+    }
 
-      async function fetchApplication() {
-        // const apps = await raygunClient.Applications.get("5n2","dbvowl");
-        const apps = await raygunClient.Plans.getAllApplications("5n2");
-        console.log("Applications", apps);
-      }
+    async function fetchApplication() {
+      const apps = await raygunClient.Applications.get("", "");
+      console.log("Application", apps);
+    }
+
+    async function fetchApplications() {
+      const apps = await raygunClient.Plans.getAllApplications("");
+      console.log("Applications", apps);
+    }
     </script>
   </head>
   <body onload="createRaygunClient()">
@@ -85,6 +89,7 @@
     <section>
       <h2>Applications</h2>
       <button onclick="fetchApplication()">Get application</button>
+      <button onclick="fetchApplications()">Get applications</button>
     </section>
   </body>
 </html>

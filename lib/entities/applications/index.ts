@@ -28,19 +28,4 @@ export class Applications {
       return res;
     });
   }
-
-  /**
-   * Retrieve all applications that matches the specified plan identifier
-   * @param _planIdentifier - Identifier of the plan that the application belongs to.
-   * @returns All applications on the plan including its relevent information about the app
-   */
-  public async getAll(_planIdentifier:string): Promise<IApplications[] | undefined> {
-    const urlSegments = ["plans", _planIdentifier, this.baseUrl];
-
-    return await wrapWithErrorHandler(async () => {
-      const url = buildApiUrl(urlSegments);
-      const res = await this.networkClient.get<IApplications[]>(url);
-      return res;
-    });
-  }
 }
