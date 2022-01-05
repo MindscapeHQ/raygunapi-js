@@ -27,4 +27,14 @@ export class Applications {
       return res;
     });
   }
+
+  public async getAll(_planIdentifier:string): Promise<IApplication[] | undefined> {
+    const urlSegments = ["plans", _planIdentifier, this.baseUrl];
+
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      const res = await this.networkClient.get<IApplication[]>(url);
+      return res;
+    });
+  }
 }

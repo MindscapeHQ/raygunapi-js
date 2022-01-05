@@ -12,5 +12,6 @@ export type IApplication = {
   planIdentifier: string;
   name: string;
   apiKey: string;
+  deploymentTrackingSetup: boolean;
   users: IUser[];
 };
