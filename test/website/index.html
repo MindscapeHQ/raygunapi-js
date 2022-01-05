@@ -2,20 +2,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <script async src="../../dist/umd/index.min.js"></script>
-    <!-- <script async src="https://cdn.raygun.io/sdk/index.min.js"></script> -->
+  <script async src="../../dist/umd/index.min.js"></script>
+  <!-- <script async src="https://cdn.raygun.io/sdk/index.min.js"></script> -->
 
   <script async>
     async function createRaygunClient() {
-      const raygunClient = await Raygun.createClient({
-        userIdentifier: "",
-        authStrategy: new Raygun.AuthStrategies.BasicAuthStrategy("", ""),
+      const proxy = "http://raygun.local/raygunapi/token";
+
+      const proxyStrategy =  new RaygunSDK.AuthStrategies.ProxyAuthStrategy(proxy);
+      proxyStrategy.authenticate = async () => {
+        return "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBEREEyNTQ1MTY2QTgyMzZGMjEzMTYwNzE2NzQzNUU4IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2NDEzMzEwMTYsImV4cCI6MTY0MTMzNDYxNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDIwIiwiY2xpZW50X2lkIjoiOTlkNDg2ZTdkNmYyNDc3MiIsInJheWd1bl91c2VySWQiOiIzMjY1MDA3OTA2IiwicmF5Z3VuX3JvbGUiOiJ1bmxpbWl0ZWQiLCJqdGkiOiI5M0M2RDgyM0RCMjI2MThFNkY4MTUwMTgxMTkyMUVBNiIsImlhdCI6MTY0MTMzMTAxNiwic2NvcGUiOlsiYWxsIiwidXNlcjozMjY1MDA3OTA2Il19.Nig896n9mUguWZd6lt0yfnEPLjgJeLoOt89s0UR1JEkdS3LqRCzauRGGjQ5LKPdVaxf6VZXR8I8Cb3Z3pvYE2eoHGDiDLXcMGuHT_zR-FcWWsWaftCXSQCove9X8oAh1VllJt3Tr8PAqt8SVFJaGADUsR2ooPMHyMg8IyKoeyR30epONf35BD5s6UthXEMEv-d4fkQQe0dAcZ0behqSQ0uAEpwi5WC1HGFQrMaEasQ2LGgV5Qz7MUGoegL6lUumtnktG8IljazsmrxO86S9MUkkoG1KIGlIbQKKUcH_-zDTPerGgad5nl-v4k-Qyo_xMXZ8e6R5ZpCSQo0Ie19TomA";
+      };
+
+      const raygunClient = await RaygunSDK.createClient({
+        userIdentifier: "1hzwg82",
+        authStrategy: proxyStrategy,
+        apiUrl: "http://localhost:5010/api/v2",
       });
 
       console.log("Client created", raygunClient);
@@ -64,32 +72,32 @@
     }
 
     async function fetchApplications() {
-      const apps = await raygunClient.Plans.getAllApplications("");
+      const apps = await raygunClient.Plans.getAllApplications("5n2");
       console.log("Applications", apps);
     }
-    </script>
-  </head>
-  <body onload="createRaygunClient()">
-    <section>
-      <h2>Client Management</h2>
-      <button onclick="createRaygunClient()">Create Client</button>
-      <button onclick="refreshAuthToken()">Refresh token</button>
-    </section>
+  </script>
+</head>
+<body onload="createRaygunClient()">
+<section>
+  <h2>Client Management</h2>
+  <button onclick="createRaygunClient()">Create Client</button>
+  <button onclick="refreshAuthToken()">Refresh token</button>
+</section>
 
-    <section>
-      <h2>Alerts</h2>
-      <button onclick="fetchAlert()">Fetch alert</button>
-      <button onclick="fetchAlerts()">Fetch alerts</button>
-      <button onclick="createAlert()">Create alert</button>
-      <button onclick="deleteAlert()">Delete alert</button>
-      <button onclick="subscribeToAlert()">Subscribe to alert</button>
-      <button onclick="unsubscribeToAlert()">Unsubscribed to alert</button>
-    </section>
+<section>
+  <h2>Alerts</h2>
+  <button onclick="fetchAlert()">Fetch alert</button>
+  <button onclick="fetchAlerts()">Fetch alerts</button>
+  <button onclick="createAlert()">Create alert</button>
+  <button onclick="deleteAlert()">Delete alert</button>
+  <button onclick="subscribeToAlert()">Subscribe to alert</button>
+  <button onclick="unsubscribeToAlert()">Unsubscribed to alert</button>
+</section>
 
-    <section>
-      <h2>Applications</h2>
-      <button onclick="fetchApplication()">Get application</button>
-      <button onclick="fetchApplications()">Get applications</button>
-    </section>
-  </body>
+<section>
+  <h2>Applications</h2>
+  <button onclick="fetchApplication()">Get application</button>
+  <button onclick="fetchApplications()">Get applications</button>
+</section>
+</body>
 </html>
