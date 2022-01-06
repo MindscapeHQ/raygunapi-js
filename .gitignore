@@ -123,3 +123,11 @@ dist
 
 # Optional stylelint cache
 .stylelintcache
+
+# IDE generated folders
+.vscode
+idea
+.idea/
+
+# Declaration files
+*.d.ts
