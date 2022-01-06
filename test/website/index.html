@@ -60,6 +60,11 @@
 
       async function fetchApplication() {
         const apps = await raygunClient.Applications.get("", "");
+        console.log("Application", apps);
+      }
+
+      async function fetchApplications() {
+        const apps = await raygunClient.Applications.getAll("");
         console.log("Applications", apps);
       }
     </script>
@@ -84,6 +89,7 @@
     <section>
       <h2>Applications</h2>
       <button onclick="fetchApplication()">Get application</button>
+      <button onclick="fetchApplications()">Get applications</button>
     </section>
   </body>
 </html>
