@@ -39,6 +39,7 @@ export enum AlertFilterType {
   EventUri = "EventUri",
   EventCountry = "EventCountry",
   EventPlatform = "EventPlatform",
+  Deployment = "Deployment",
 }
 
 export enum AlertComparator {
