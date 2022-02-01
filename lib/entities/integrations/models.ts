@@ -17,13 +17,8 @@ export interface IWebhooksIntegrationData extends IIntegrationData {
  * Represents an Integration object.
  */
 export type IIntegration = {
-    identifier: string;
+    id: number;
     name: string;
     type: IIntegrationType;
     data: IIntegrationData;
 };
-
-/**
- * Represents the payload required to create an integration.
- */
-export type ICreateIntegrationPayload = Omit<IIntegration, "identifier">;
