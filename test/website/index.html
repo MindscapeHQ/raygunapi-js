@@ -72,6 +72,11 @@
         const integrations = await raygunClient.Integrations.getAll("");
         console.log("Integrations", integrations);
       }
+
+      async function createIntegration() {
+        const integration = await raygunClient.Integrations.create("", {});
+        console.log("Created integration", integration);
+      }
     </script>
   </head>
   <body onload="createRaygunClient()">
@@ -100,6 +105,7 @@
     <section>
       <h2>Integrations</h2>
       <button onclick="getIntegrations()">Get integrations</button>
+      <button onclick="createIntegration()">Create integration</button>
     </section>
   </body>
 </html>
