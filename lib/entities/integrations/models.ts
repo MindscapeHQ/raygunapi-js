@@ -1,24 +1,19 @@
 /** @format */
 
-import {IntegrationType} from "./enums";
+import { IntegrationType } from "./enums";
 
 export type IIntegrationType = {
     type: IntegrationType
     value: string;
 };
 
-export interface IIntegrationData { }
-
-export interface IWebhooksIntegrationData extends IIntegrationData {
+export type IWebhooksIntegrationData = {
     url: string;
 }
 
-/**
- * Represents an Integration object.
- */
 export type IIntegration = {
     identifier: string;
     name: string;
     type: IIntegrationType;
-    data: IIntegrationData;
+    data: IWebhooksIntegrationData;
 };
