@@ -15,5 +15,11 @@ export type IIntegration = {
     identifier: string;
     name: string;
     type: IIntegrationType;
+
     data: IWebhooksIntegrationData;
 };
+
+/**
+ * Represents the payload required to create an integration.
+ */
+export type ICreateIntegrationPayload = Omit<IIntegration, "identifier">;
