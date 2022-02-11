@@ -68,7 +68,7 @@
         console.log("Applications", apps);
       }
 
-      async function getIntegrations() {
+      async function fetchIntegrations() {
         const integrations = await raygunClient.Integrations.getAll("");
         console.log("Integrations", integrations);
       }
@@ -99,7 +99,7 @@
 
     <section>
       <h2>Integrations</h2>
-      <button onclick="getIntegrations()">Get integrations</button>
+      <button onclick="fetchIntegrations()">Get integrations</button>
     </section>
   </body>
 </html>
