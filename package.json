@@ -1,7 +1,7 @@
 {
   "name": "@raygun.io/sdk",
   "displayName": "RaygunSDK",
-  "version": "0.1.50",
+  "version": "0.1.53",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -15,9 +15,6 @@
     "test": "jest",
     "test-browser": "serve .",
     "docs": "typedoc"
-  },
-  "publishConfig": {
-    "access": "restricted"
   },
   "keywords": [],
   "author": "",
