@@ -1,5 +1,5 @@
 /** @format */
 
 export enum IntegrationType {
-    Webhook = "Webhook"
+  Webhook = "Webhook"
 }
