@@ -1,6 +1,6 @@
 /** @format */
 
-import { Alerts, Applications } from "../entities";
+import { Alerts, Applications, Integrations } from "../entities";
 
 type IPageLink = {
   href: string;
@@ -27,4 +27,5 @@ export type IRaygunClient = {
   refreshToken: () => Promise<string | undefined>;
   Alerts: Alerts;
   Applications: Applications;
+  Integrations: Integrations;
 };
