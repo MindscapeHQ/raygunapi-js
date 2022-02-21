@@ -30,7 +30,7 @@ export class Integrations {
   /**
    * Create a new integration for the given plan
    * @param planIdentifier - Identifier of the target plan
-   * @param integration - The integration to create
+   * @param integration - The integration payload to create a new integration
    * @returns The created integration
    */
   async create(planIdentifier: string, integration: ICreateIntegrationPayload): Promise<IIntegration | undefined> {
