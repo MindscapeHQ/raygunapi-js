@@ -22,10 +22,12 @@ export enum AlertConditionType {
 
 export enum AlertActionType {
   User = "User",
+  Integration = "Integration",
 }
 
 export enum AlertActionSettingType {
   UserId = "UserId",
+  IntegrationId = "IntegrationId",
 }
 
 export enum AlertTargetType {
