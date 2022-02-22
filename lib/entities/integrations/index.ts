@@ -5,6 +5,8 @@ import { buildApiUrl, IQueryParams, NetworkClient } from "../../network";
 import { wrapWithErrorHandler } from "../../network/utils";
 import { ICreateIntegrationPayload, IIntegration } from "./models";
 
+export * from "./enums";
+
 export class Integrations {
   networkClient: NetworkClient;
   baseUrl: string = "integrations";
