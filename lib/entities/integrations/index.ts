@@ -1,8 +1,11 @@
 /** @format */
 
-import { buildApiUrl, NetworkClient } from "../../network";
+import { GlobalConfig } from "../../config";
+import { buildApiUrl, IQueryParams, NetworkClient } from "../../network";
 import { wrapWithErrorHandler } from "../../network/utils";
-import { IIntegration } from "./models";
+import { ICreateIntegrationPayload, IIntegration } from "./models";
+
+export * from "./enums";
 
 export class Integrations {
   networkClient: NetworkClient;
@@ -19,11 +22,30 @@ export class Integrations {
    */
   public async getAll(planIdentifier: string): Promise<IIntegration[] | undefined> {
       const urlSegments = [planIdentifier, this.baseUrl];
+         return await wrapWithErrorHandler(async () => {
+            const url = buildApiUrl(urlSegments);
+            const res = await this.networkClient.get<IIntegration[]>(url);
+            return res;
+        });
+    }
 
-       return await wrapWithErrorHandler(async () => {
-          const url = buildApiUrl(urlSegments);
-          const res = await this.networkClient.get<IIntegration[]>(url);
-          return res;
-      });
+  /**
+   * Create a new integration for the given plan
+   * @param planIdentifier - Identifier of the target plan
+   * @param integration - The integration payload to create a new integration
+   * @returns The created integration
+   */
+  async create(planIdentifier: string, integration: ICreateIntegrationPayload): Promise<IIntegration | undefined> {
+    let urlSegments = [planIdentifier, this.baseUrl];
+
+    var queryParams: IQueryParams = {
+      userIdentifier: GlobalConfig.userIdentifier,
+    };
+
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      const res = await this.networkClient.post<IIntegration>(url, integration, queryParams);
+      return res;
+    });
   }
 }

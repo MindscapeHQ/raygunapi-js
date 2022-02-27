@@ -5,6 +5,7 @@ import { IRaygunClient } from "./models";
 import { GlobalConfig } from "./config";
 
 export * from "./entities/alerts/enums";
+export * from "./entities/integrations/enums";
 
 export type IClientOptions = {
   authStrategy: IAuthStrategy;
