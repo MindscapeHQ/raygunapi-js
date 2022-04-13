@@ -2,7 +2,7 @@
 
 import { GlobalConfig } from "../../config";
 import { buildApiUrl, IQueryParams, NetworkClient } from "../../network";
-import { wrapWithErrorHandler } from "../../network/utils";
+import { addQueryStringParams, wrapWithErrorHandler } from "../../network/utils";
 import { ICreateIntegrationPayload, IIntegration } from "./models";
 
 export * from "./enums";
@@ -18,12 +18,16 @@ export class Integrations {
   /**
    * Retrieve all integrations that matches the specified plan identifier
    * @param planIdentifier - Identifier of the plan that the integration belongs to.
+   * @param showData - Determines whether the returned payload has IntegrationData attached to it.
    * @returns All integrations on the plan including its relevant information about the integration
    */
-  public async getAll(planIdentifier: string): Promise<IIntegration[] | undefined> {
+  public async getAll(planIdentifier: string, showData: boolean = false): Promise<IIntegration[] | undefined> {
       const urlSegments = [planIdentifier, this.baseUrl];
+      const queryStringParameters = {["showData"] : showData}
          return await wrapWithErrorHandler(async () => {
             const url = buildApiUrl(urlSegments);
+            const fullUrl = addQueryStringParams(url, queryStringParameters);
+           console.log(fullUrl);
             const res = await this.networkClient.get<IIntegration[]>(url);
             return res;
         });
