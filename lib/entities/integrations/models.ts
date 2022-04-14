@@ -6,11 +6,15 @@ export type IWebhooksIntegrationData = {
   url: string;
 }
 
+export type ISlackIntegrationData = {
+  accessToken: string | null;
+}
+
 export type IIntegration = {
     identifier: string;
     name: string;
     type: IntegrationType;
-    data: IWebhooksIntegrationData;
+    data: IWebhooksIntegrationData | ISlackIntegrationData;
 };
 
 /**
