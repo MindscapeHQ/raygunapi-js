@@ -18,17 +18,16 @@ export class Integrations {
   /**
    * Retrieve all integrations that matches the specified plan identifier
    * @param planIdentifier - Identifier of the plan that the integration belongs to.
-   * @param showData - Determines whether the returned payload has IntegrationData attached to it.
+   * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.
    * @returns All integrations on the plan including its relevant information about the integration
    */
-  public async getAll(planIdentifier: string, showData: boolean = false): Promise<IIntegration[] | undefined> {
+  public async getAll(planIdentifier: string, showSensitiveData: boolean = false): Promise<IIntegration[] | undefined> {
       const urlSegments = [planIdentifier, this.baseUrl];
-      const queryStringParameters = {["showData"] : showData}
+      const queryStringParameters = {["showSensitiveData"] : showSensitiveData}
          return await wrapWithErrorHandler(async () => {
             const url = buildApiUrl(urlSegments);
-            const fullUrl = addQueryStringParams(url, queryStringParameters);
-           console.log(fullUrl);
-            const res = await this.networkClient.get<IIntegration[]>(url);
+            const urlWithQsp = addQueryStringParams(url, queryStringParameters);
+            const res = await this.networkClient.get<IIntegration[]>(urlWithQsp);
             return res;
         });
     }
