@@ -2,7 +2,7 @@
 
 import { GlobalConfig } from "../../config";
 import { buildApiUrl, IQueryParams, NetworkClient } from "../../network";
-import { addQueryStringParams, wrapWithErrorHandler } from "../../network/utils";
+import { wrapWithErrorHandler } from "../../network/utils";
 import { ICreateIntegrationPayload, IIntegration } from "./models";
 
 export * from "./enums";
@@ -22,15 +22,17 @@ export class Integrations {
    * @returns All integrations on the plan including its relevant information about the integration
    */
   public async getAll(planIdentifier: string, showSensitiveData: boolean = false): Promise<IIntegration[] | undefined> {
-      const urlSegments = [planIdentifier, this.baseUrl];
-      const queryStringParameters = {["showSensitiveData"] : showSensitiveData}
-         return await wrapWithErrorHandler(async () => {
-            const url = buildApiUrl(urlSegments);
-            const urlWithQsp = addQueryStringParams(url, queryStringParameters);
-            const res = await this.networkClient.get<IIntegration[]>(urlWithQsp);
-            return res;
-        });
-    }
+    const urlSegments = [planIdentifier, this.baseUrl];
+    const queryParams: IQueryParams = {
+      showSensitiveData: showSensitiveData,
+    };
+
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      const res = await this.networkClient.get<IIntegration[]>(url, queryParams);
+      return res;
+    });
+  }
 
   /**
    * Create a new integration for the given plan
