@@ -16,7 +16,7 @@ export class Integrations {
   }
 
   /**
-   * Retrieve an integrations matching the given identifier
+   * Retrieve an integration matching the given identifier
    * @param planIdentifier - Identifier of the target plan
    * @param identifier - Id related to a specific integration
    * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.
