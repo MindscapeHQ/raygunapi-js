@@ -16,6 +16,26 @@ export class Integrations {
   }
 
   /**
+   * Retrieve an integration matching the given identifier
+   * @param planIdentifier - Identifier of the target plan
+   * @param identifier - Id related to a specific integration
+   * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.
+   * @returns A single integration or null if not found;
+   */
+  public async get(planIdentifier: string, identifier: string, showSensitiveData: boolean = false): Promise<IIntegration | undefined> {
+    const urlSegments = [planIdentifier, this.baseUrl, identifier];
+    const queryParams: IQueryParams = {
+      showSensitiveData: showSensitiveData,
+    };
+
+    return await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      const res = await this.networkClient.get<IIntegration>(url, queryParams);
+      return res;
+    });
+  }
+
+  /**
    * Retrieve all integrations that matches the specified plan identifier
    * @param planIdentifier - Identifier of the plan that the integration belongs to.
    * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.

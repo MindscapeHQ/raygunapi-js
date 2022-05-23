@@ -28,6 +28,7 @@ export enum AlertActionType {
 export enum AlertActionSettingType {
   UserId = "UserId",
   IntegrationId = "IntegrationId",
+  SlackChannelId = "SlackChannelId"
 }
 
 export enum AlertTargetType {
