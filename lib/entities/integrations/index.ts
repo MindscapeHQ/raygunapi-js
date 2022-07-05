@@ -73,4 +73,23 @@ export class Integrations {
       return res;
     });
   }
+
+  /**
+   * Delete an integration matching the given identifier for the given plan
+   * @param planIdentifier - Identifier of the target plan
+   * @param identifier - Id related to a specific integration
+   */
+  async delete(planIdentifier: string, identifier: string): Promise<void> {
+    let urlSegments = [planIdentifier, this.baseUrl, identifier];
+
+    var queryParams: IQueryParams = {
+      userIdentifier: GlobalConfig.userIdentifier,
+    };
+
+    await wrapWithErrorHandler(async () => {
+      const url = buildApiUrl(urlSegments);
+      await this.networkClient.deleteFromApi(url, undefined, queryParams);
+    });
+  }
 }
+
