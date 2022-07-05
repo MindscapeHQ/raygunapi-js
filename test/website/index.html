@@ -82,6 +82,11 @@
         const integration = await raygunClient.Integrations.create("", {});
         console.log("Created integration", integration);
       }
+
+      async function deleteIntegration() {
+        const integration = await raygunClient.Integrations.delete("", "");
+        console.log("Deleted integration", integration);
+      }
     </script>
   </head>
   <body onload="createRaygunClient()">
