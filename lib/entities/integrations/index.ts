@@ -82,13 +82,9 @@ export class Integrations {
   async delete(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier];
 
-    var queryParams: IQueryParams = {
-      userIdentifier: GlobalConfig.userIdentifier,
-    };
-
     await wrapWithErrorHandler(async () => {
       const url = buildApiUrl(urlSegments);
-      await this.networkClient.deleteFromApi(url, undefined, queryParams);
+      await this.networkClient.deleteFromApi(url, undefined);
     });
   }
 }
