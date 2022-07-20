@@ -8,8 +8,8 @@ export type IWebhooksIntegrationData = {
 
 export type ISlackIntegrationData = {
   accessToken: string | null;
-  teamId: string;
-  botUserId: string;
+  teamId: string | null;
+  botUserId: string |null;
 }
 
 export type IIntegration = {
