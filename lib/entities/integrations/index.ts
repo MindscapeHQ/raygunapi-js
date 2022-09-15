@@ -19,18 +19,14 @@ export class Integrations {
    * Retrieve an integration matching the given identifier
    * @param planIdentifier - Identifier of the target plan
    * @param identifier - Id related to a specific integration
-   * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.
    * @returns A single integration or null if not found;
    */
-  public async get(planIdentifier: string, identifier: string, showSensitiveData: boolean = false): Promise<IIntegration | undefined> {
+  public async get(planIdentifier: string, identifier: string): Promise<IIntegration | undefined> {
     const urlSegments = [planIdentifier, this.baseUrl, identifier];
-    const queryParams: IQueryParams = {
-      showSensitiveData: showSensitiveData,
-    };
 
     return await wrapWithErrorHandler(async () => {
       const url = buildApiUrl(urlSegments);
-      const res = await this.networkClient.get<IIntegration>(url, queryParams);
+      const res = await this.networkClient.get<IIntegration>(url);
       return res;
     });
   }
@@ -38,18 +34,14 @@ export class Integrations {
   /**
    * Retrieve all integrations that matches the specified plan identifier
    * @param planIdentifier - Identifier of the plan that the integration belongs to.
-   * @param showSensitiveData - Determines whether the returned payload has sensitive IntegrationData values attached to it.
    * @returns All integrations on the plan including its relevant information about the integration
    */
-  public async getAll(planIdentifier: string, showSensitiveData: boolean = false): Promise<IIntegration[] | undefined> {
+  public async getAll(planIdentifier: string): Promise<IIntegration[] | undefined> {
     const urlSegments = [planIdentifier, this.baseUrl];
-    const queryParams: IQueryParams = {
-      showSensitiveData: showSensitiveData,
-    };
 
     return await wrapWithErrorHandler(async () => {
       const url = buildApiUrl(urlSegments);
-      const res = await this.networkClient.get<IIntegration[]>(url, queryParams);
+      const res = await this.networkClient.get<IIntegration[]>(url);
       return res;
     });
   }
