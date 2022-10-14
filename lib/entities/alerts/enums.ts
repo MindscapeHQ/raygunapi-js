@@ -1,4 +1,4 @@
-/** @format */
+/** @format **/
 
 export enum AlertInterval {
   None = "None",
@@ -18,6 +18,26 @@ export enum AlertConditionType {
   LargestContentfulPaintAverage = "LargestContentfulPaintAverage",
   FirstInputDelayAverage = "FirstInputDelayAverage",
   CumulativeLayoutShiftAverage = "CumulativeLayoutShiftAverage",
+  LoadTimeP75 = "LoadTimeP75",
+  FirstContentfulPaintP75 = "FirstContentfulPaintP75",
+  LargestContentfulPaintP75 = "LargestContentfulPaintP75",
+  FirstInputDelayP75 = "FirstInputDelayP75",
+  CumulativeLayoutShiftP75 = "CumulativeLayoutShiftP75",
+  LoadTimeP50 = "LoadTimeP50",
+  FirstContentfulPaintP50 = "FirstContentfulPaintP50",
+  LargestContentfulPaintP50 = "LargestContentfulPaintP50",
+  FirstInputDelayP50 = "FirstInputDelayP50",
+  CumulativeLayoutShiftP50 = "CumulativeLayoutShiftP50",
+  LoadTimeP90 = "LoadTimeP90",
+  FirstContentfulPaintP90 = "FirstContentfulPaintP90",
+  LargestContentfulPaintP90 = "LargestContentfulPaintP90",
+  FirstInputDelayP90 = "FirstInputDelayP90",
+  CumulativeLayoutShiftP90 = "CumulativeLayoutShiftP90",
+  LoadTimeP99 = "LoadTimeP99",
+  FirstContentfulPaintP99 = "FirstContentfulPaintP99",
+  LargestContentfulPaintP99 = "LargestContentfulPaintP99",
+  FirstInputDelayP99 = "FirstInputDelayP99",
+  CumulativeLayoutShiftP99 = "CumulativeLayoutShiftP99",
 }
 
 export enum AlertActionType {
