@@ -70,7 +70,6 @@ export class Integrations {
    * Delete an integration matching the given identifier for the given plan
    * @param planIdentifier - Identifier of the target plan
    * @param identifier - Id related to a specific integration
-   * @param userId - Id of the user logged in
    */
   async delete(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier];
