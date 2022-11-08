@@ -72,16 +72,12 @@ export class Integrations {
    * @param identifier - Id related to a specific integration
    * @param userId - Id of the user logged in
    */
-  async delete(planIdentifier: string, identifier: string, userId: string): Promise<void> {
+  async delete(planIdentifier: string, identifier: string): Promise<void> {
     let urlSegments = [planIdentifier, this.baseUrl, identifier];
-
-    const queryParams: IQueryParams = {
-      userId: userId,
-    }
 
     await wrapWithErrorHandler(async () => {
       const url = buildApiUrl(urlSegments);
-      await this.networkClient.deleteFromApi(url, queryParams);
+      await this.networkClient.deleteFromApi(url, undefined);
     });
   }
 }
