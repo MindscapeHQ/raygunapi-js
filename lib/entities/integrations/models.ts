@@ -13,7 +13,7 @@ export type ISlackIntegrationData = {
 }
 
 export type IMicrosoftTeamsIntegrationData = {
-  teamId: string | null;
+  teamId: string;
   serviceUrl: string | null;
 }
 
