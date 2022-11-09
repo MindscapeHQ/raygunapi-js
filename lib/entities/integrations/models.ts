@@ -12,11 +12,16 @@ export type ISlackIntegrationData = {
   botUserId: string |null;
 }
 
+export type IMicrosoftTeamsIntegrationData = {
+  teamId: string;
+  serviceUrl: string | null;
+}
+
 export type IIntegration = {
     identifier: string;
     name: string;
     type: IntegrationType;
-    data: IWebhooksIntegrationData | ISlackIntegrationData;
+    data: IWebhooksIntegrationData | ISlackIntegrationData | IMicrosoftTeamsIntegrationData;
 };
 
 /**
