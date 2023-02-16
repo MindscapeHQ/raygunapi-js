@@ -6,11 +6,13 @@ export type IWebhooksIntegrationData = {
   url: string;
 }
 
-// The reason why some of these properties have the null type
-// is because they are marked as sensitive properties,
-// so they may come back as null from our public api.
-// When adding more properties, check if they are sensitive on the public api
-// If they are, only then give them the null type
+/**
+ * The reason why these properties have a null type
+ * is because they're marked as sensitive properties.
+ * So they may come back as null from our Public API.
+ * When adding more properties, check if they are sensitive on the Public API.
+ * If they are, only then give them the null type.
+ */
 
 export type ISlackIntegrationData = {
   accessToken: string | null;
