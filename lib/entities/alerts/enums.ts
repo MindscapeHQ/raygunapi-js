@@ -18,6 +18,7 @@ export enum AlertConditionType {
   LargestContentfulPaintAverage = "LargestContentfulPaintAverage",
   FirstInputDelayAverage = "FirstInputDelayAverage",
   CumulativeLayoutShiftAverage = "CumulativeLayoutShiftAverage",
+  InteractionNextPaintAverage = "InteractionNextPaintAverage",
 }
 
 export enum AlertActionType {
