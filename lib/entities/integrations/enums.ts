@@ -3,5 +3,6 @@
 export enum IntegrationType {
   Webhook = "Webhook",
   Slack = "Slack",
-  MicrosoftTeams = "MicrosoftTeams"
+  MicrosoftTeams = "MicrosoftTeams",
+  OpenAi = "OpenAi"
 }

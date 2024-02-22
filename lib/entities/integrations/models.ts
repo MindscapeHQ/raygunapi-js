@@ -27,11 +27,16 @@ export type IMicrosoftTeamsIntegrationData = {
   tenantId: string | null;
 }
 
+export type IOpenAiIntegrationData = {
+  apiKey: string | null;
+  model: string | null;
+}
+
 export type IIntegration = {
     identifier: string;
     name: string;
     type: IntegrationType;
-    data: IWebhooksIntegrationData | ISlackIntegrationData | IMicrosoftTeamsIntegrationData;
+    data: IWebhooksIntegrationData | ISlackIntegrationData | IMicrosoftTeamsIntegrationData | IOpenAiIntegrationData;
 };
 
 /**
