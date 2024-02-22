@@ -29,6 +29,7 @@ export type IMicrosoftTeamsIntegrationData = {
 
 export type IOpenAiIntegrationData = {
   apiKey: string | null;
+  model: string | null;
 }
 
 export type IIntegration = {
