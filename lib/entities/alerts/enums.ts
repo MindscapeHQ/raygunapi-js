@@ -50,4 +50,6 @@ export enum AlertFilterType {
 export enum AlertComparator {
   Equals = "Equals",
   Contains = "Contains",
+  DoesNotEqual = "DoesNotEqual",
+  DoesNotContain = "DoesNotContain"
 }
