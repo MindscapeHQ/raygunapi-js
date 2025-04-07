@@ -19,6 +19,12 @@ export enum AlertConditionType {
   FirstInputDelayAverage = "FirstInputDelayAverage",
   CumulativeLayoutShiftAverage = "CumulativeLayoutShiftAverage",
   InteractionNextPaintAverage = "InteractionNextPaintAverage",
+  LoadTimeP75 = "LoadTimeP75",
+  FirstContentfulPaintP75 = "FirstContentfulPaintP75",
+  LargestContentfulPaintP75 = "LargestContentfulPaintP75",
+  FirstInputDelayP75 = "FirstInputDelayP75",
+  CumulativeLayoutShiftP75 = "CumulativeLayoutShiftP75",
+  InteractionNextPaintP75 = "InteractionNextPaintP75"
 }
 
 export enum AlertActionType {
